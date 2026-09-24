@@ -1,0 +1,69 @@
+@if (member(); as m) {
+  <section class="page-hero">
+    <div class="container hero">
+      @if (m.photo) {
+        <img class="monogram" [src]="m.photo" [alt]="m.name" width="340" height="340" />
+      } @else {
+        <div class="monogram">{{ m.initials }}</div>
+      }
+      <div>
+        <a class="back" routerLink="/team">← Our Team</a>
+        <h1>{{ m.name }}</h1>
+        <p class="role">{{ m.title }}</p>
+        <ul class="chips">
+          @for (h of m.highlights; track h) {
+            <li>{{ h }}</li>
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container layout">
+      <article class="bio">
+        @for (block of m.bio; track $index) {
+          @if (block.heading) {
+            <h2>{{ block.heading }}</h2>
+          }
+          @for (p of block.paragraphs; track $index) {
+            <p>{{ p }}</p>
+          }
+        }
+      </article>
+
+      <aside class="facts">
+        <h3>At a glance</h3>
+        <dl>
+          @for (c of m.credentials; track $index) {
+            <div>
+              <dt>{{ c.label }}</dt>
+              <dd>{{ c.detail }}</dd>
+            </div>
+          }
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section others">
+    <div class="container">
+      <span class="eyebrow">Also on the team</span>
+      <div class="other-grid">
+        @for (o of others(); track o.slug) {
+          <a class="other" [routerLink]="['/team', o.slug]">
+            @if (o.photo) {
+              <img class="monogram" [src]="o.photo" [alt]="o.name" width="104" height="104" loading="lazy" />
+            } @else {
+              <div class="monogram">{{ o.initials }}</div>
+            }
+            <div>
+              <strong>{{ o.name }}</strong>
+              <span>{{ o.title }}</span>
+            </div>
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+}

@@ -1,0 +1,87 @@
+<section class="page-hero">
+  <div class="container hero-split">
+    <div>
+      <span class="eyebrow">About Us</span>
+      <h1>Curated content with <em>context</em>, not clutter.</h1>
+      <p class="lead">
+        In the ever-expanding digital content space, Charchalive stands out as an outlier. It offers curated
+        content, culled from authentic sources and covered with unique context, to add to the ken of the visitors.
+      </p>
+    </div>
+    <figure class="hero-media">
+      <img [src]="images.aboutHero.src" [alt]="images.aboutHero.alt" width="900" height="675" fetchpriority="high" />
+    </figure>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container intro">
+    <blockquote>
+      We revel in our pithy content that contains <strong>perspectives rather than prejudices</strong>.
+    </blockquote>
+    <div>
+      <p>
+        The wide range — stretching from skin to spirituality — promises to be a delight for today’s youth and
+        even those who nurtured them.
+      </p>
+      <p>
+        From historical parliamentary debates to celebrated cases which added a new dimension to Indian
+        jurisprudence; from the latest in science &amp; tech to travel and tourism; and from food recipes to fitness
+        &amp; fashion tips, every section will contribute to any netizen’s quest for an ‘informed and good’ living.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="container">
+    <span class="eyebrow">What we cover</span>
+    <h2>From skin to spirituality</h2>
+    <div class="topic-grid">
+      @for (s of sections; track s.title; let i = $index) {
+        <article class="topic">
+          <img [src]="s.image.src" [alt]="s.image.alt" width="600" height="375" loading="lazy" />
+          <div class="topic-body">
+            <span class="num">{{ i < 9 ? '0' : '' }}{{ i + 1 }}</span>
+            <h3>{{ s.title }}</h3>
+            <p>{{ s.text }}</p>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">Signature features</span>
+    <h2>More than a feed</h2>
+    <div class="feature-grid">
+      @for (f of features; track f.title) {
+        <article class="feature">
+          <img [src]="f.image.src" [alt]="f.image.alt" width="700" height="875" loading="lazy" />
+          <div class="feature-body">
+            <span class="tag">{{ f.tag }}</span>
+            <h3>{{ f.title }}</h3>
+            <p>{{ f.text }}</p>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta">
+      <div>
+        <h2>Your go-to digital destination</h2>
+        <p>Charchalive seeks to generate lively conversations over diverse topics. Come, be part of the charcha.</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn" routerLink="/team">Meet the team</a>
+        <a class="btn btn-ghost" routerLink="/contact">Contact us</a>
+      </div>
+    </div>
+  </div>
+</section>

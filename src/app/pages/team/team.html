@@ -1,0 +1,38 @@
+<section class="page-hero">
+  <div class="container hero-split">
+    <div>
+      <span class="eyebrow">Our Team</span>
+      <h1>The people behind the conversation</h1>
+      <p class="lead">
+        Decades of experience across journalism, research, communications and public policy — brought together to
+        build a thoughtful home for curated content.
+      </p>
+    </div>
+    <figure class="hero-media">
+      <img [src]="hero.src" [alt]="hero.alt" width="900" height="675" fetchpriority="high" />
+    </figure>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container grid">
+    @for (m of team; track m.slug) {
+      <a class="card" [routerLink]="['/team', m.slug]">
+        @if (m.photo) {
+          <img class="monogram" [src]="m.photo" [alt]="m.name" width="144" height="144" />
+        } @else {
+          <div class="monogram">{{ m.initials }}</div>
+        }
+        <h2>{{ m.name }}</h2>
+        <p class="role">{{ m.title }}</p>
+        <p class="summary">{{ m.summary }}</p>
+        <ul>
+          @for (h of m.highlights; track h) {
+            <li>{{ h }}</li>
+          }
+        </ul>
+        <span class="more">Read full profile →</span>
+      </a>
+    }
+  </div>
+</section>
