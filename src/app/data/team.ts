@@ -98,7 +98,7 @@ export const TEAM: TeamMember[] = [
   {
     slug: 'abhilasha-daftuar',
     photo: 'images/team/abhilasha-daftuar.jpg',
-    name: 'Abhilasha Daftuar',
+    name: 'Abhilasha Daftuar (Founder)',
     initials: 'AD',
     title: 'Researcher & Writer — International Relations',
     summary:
