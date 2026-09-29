@@ -4,6 +4,7 @@ import { SITE } from './data/site';
 import { ThemeService } from './theme';
 
 @Component({
+  host: { '(window:scroll)': 'onScroll()' },
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
   selector: 'app-root',
   styleUrl: './app.scss',
@@ -13,6 +14,9 @@ export class App {
   protected readonly site = SITE;
   protected readonly year = new Date().getFullYear();
   protected readonly menuOpen = signal(false);
+  protected readonly showTop = signal(false);
+  protected readonly scrolled = signal(false);
+  protected readonly scrollProgress = signal(0);
   protected readonly themes = inject(ThemeService);
 
   protected readonly themeLabels = {
@@ -20,6 +24,17 @@ export class App {
     light: 'Theme: light',
     dark: 'Theme: dark',
   } as const;
+
+  protected onScroll(): void {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    this.scrolled.set(window.scrollY > 8);
+    this.showTop.set(window.scrollY > 400);
+    this.scrollProgress.set(max > 0 ? Math.min(100, Math.round((window.scrollY / max) * 100)) : 0);
+  }
+
+  protected scrollToTop(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
   protected readonly nav = [
     { label: 'About Us', path: '/about' },

@@ -14,7 +14,7 @@ export class Contact {
   protected readonly site = SITE;
   protected readonly sent = signal(false);
 
-  protected readonly topics = ['General enquiry', 'Your Corner submission', 'The Talk podcast', 'Partnerships', 'Feedback'];
+  protected readonly topics = ['General enquiry', 'Aapki Awaaz submission', 'Charcha podcast', 'Partnerships', 'Feedback'];
 
   protected readonly form = inject(FormBuilder).nonNullable.group({
     name: ['', [Validators.required, Validators.minLength(2)]],

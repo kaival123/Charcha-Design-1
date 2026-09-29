@@ -20,11 +20,11 @@ const commons = (file: string, photo: Omit<Photo, 'src' | 'source'> & { commonsT
 
 export const IMAGES = {
   aboutHero: commons('about-hero', {
-    alt: 'A man reading at a café table by the window, with a cup of tea',
-    title: 'Old man reading newspaper with tea',
-    author: 'Jeff Sheldon',
-    license: 'CC0',
-    commonsTitle: 'Old man reading newspaper with tea (Unsplash).jpg',
+    alt: 'A magnifying glass held over a printed page, bringing one passage into focus',
+    title: 'Magnifying glass with focus on paper',
+    author: 'Niabot',
+    license: 'CC BY-SA 3.0',
+    commonsTitle: 'Magnifying glass with focus on paper.png',
   }),
   teamHero: commons('team-hero', {
     alt: 'Stacks of old books in front of a bookshelf',
