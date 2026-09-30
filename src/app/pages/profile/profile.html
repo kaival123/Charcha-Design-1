@@ -1,6 +1,6 @@
 @if (member(); as m) {
   <section class="page-hero">
-    <div class="container hero" appReveal>
+    <div class="container hero" data-aos="fade-up">
       @if (m.photo) {
         <img class="monogram" [src]="m.photo" [alt]="m.name" width="340" height="340" />
       } @else {
@@ -24,15 +24,15 @@
       <article class="bio">
         @for (block of m.bio; track $index) {
           @if (block.heading) {
-            <h2 appReveal>{{ block.heading }}</h2>
+            <h2 data-aos="fade-up">{{ block.heading }}</h2>
           }
           @for (p of block.paragraphs; track $index) {
-            <p appReveal>{{ p }}</p>
+            <p data-aos="fade-up">{{ p }}</p>
           }
         }
       </article>
 
-      <aside class="facts" appReveal="right" [revealDelay]="150">
+      <aside class="facts" data-aos="fade-left" data-aos-delay="150">
         <h3>At a glance</h3>
         <dl>
           @for (c of m.credentials; track $index) {
@@ -48,20 +48,29 @@
 
   <section class="section others">
     <div class="container">
-      <span class="eyebrow" appReveal>Also on the team</span>
+      <span class="eyebrow" data-aos="fade-up">Also on the team</span>
       <div class="other-grid">
         @for (o of others(); track o.slug; let i = $index) {
-          <a class="other" appReveal [revealDelay]="i * 110" [routerLink]="['/team', o.slug]">
-            @if (o.photo) {
-              <img class="monogram" [src]="o.photo" [alt]="o.name" width="104" height="104" loading="lazy" />
-            } @else {
-              <div class="monogram">{{ o.initials }}</div>
-            }
-            <div>
-              <strong>{{ o.name }}</strong>
-              <span>{{ o.title }}</span>
-            </div>
-          </a>
+          <div class="aos-item" data-aos="fade-up" [attr.data-aos-delay]="i * 150">
+            <a class="other" [routerLink]="['/team', o.slug]">
+              @if (o.photo) {
+                <img
+                  class="monogram"
+                  [src]="o.photo"
+                  [alt]="o.name"
+                  width="104"
+                  height="104"
+                  loading="lazy"
+                />
+              } @else {
+                <div class="monogram">{{ o.initials }}</div>
+              }
+              <div>
+                <strong>{{ o.name }}</strong>
+                <span>{{ o.title }}</span>
+              </div>
+            </a>
+          </div>
         }
       </div>
     </div>

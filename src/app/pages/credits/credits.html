@@ -1,5 +1,5 @@
 <section class="page-hero">
-  <div class="container" appReveal>
+  <div class="container" data-aos="fade-up">
     <span class="eyebrow">Photo Credits</span>
     <h1>With thanks to the photographers</h1>
     <p class="lead">
@@ -11,7 +11,7 @@
 <section class="section">
   <div class="container list">
     @for (p of photos; track p.src; let i = $index) {
-      <article class="credit" appReveal [revealDelay]="(i % 2) * 90">
+      <article class="credit" data-aos="fade-up" [attr.data-aos-delay]="(i % 2) * 150">
         <img [src]="p.src" [alt]="p.alt" width="160" height="120" loading="lazy" />
         <div>
           <h3><a [href]="p.source" target="_blank" rel="noopener">{{ p.title }}</a></h3>

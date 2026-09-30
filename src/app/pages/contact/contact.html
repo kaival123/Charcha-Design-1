@@ -1,6 +1,6 @@
 <section class="page-hero">
   <div class="container hero-split">
-    <div appReveal>
+    <div data-aos="fade-right">
       <span class="eyebrow">Contact Us</span>
       <h1>Let’s start a charcha</h1>
       <p class="lead">
@@ -8,7 +8,7 @@
         hear from you.
       </p>
     </div>
-    <figure class="hero-media" appReveal="right" [revealDelay]="150">
+    <figure class="hero-media" data-aos="fade-left" data-aos-delay="200">
       <img [src]="hero.src" [alt]="hero.alt" width="900" height="675" fetchpriority="high" />
     </figure>
   </div>
@@ -16,7 +16,7 @@
 
 <section class="section">
   <div class="container layout">
-    <aside class="info" appReveal="left">
+    <aside class="info" data-aos="fade-right">
       <div class="item">
         <span class="label">Email</span>
         <a [href]="'mailto:' + site.email">{{ site.email }}</a>
@@ -35,7 +35,7 @@
       </div>
     </aside>
 
-    <div class="form-card" appReveal [revealDelay]="120">
+    <div class="form-card" data-aos="fade-left" data-aos-delay="150">
       @if (status() === 'sent') {
         <div class="success" role="status">
           <h2>Thank you!</h2>

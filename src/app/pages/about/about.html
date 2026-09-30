@@ -1,33 +1,42 @@
 <section class="page-hero">
   <div class="container hero-split">
-    <div appReveal>
+    <div data-aos="fade-right">
       <span class="eyebrow">About Us</span>
       <h1>Curated content with <em>context</em>, not clutter.</h1>
       <p class="lead">
-        In the ever-expanding digital content space, Charchalive stands out as an outlier. It offers curated
-        content, culled from authentic sources and covered with unique context, to add to the ken of the visitors.
+        In the ever-expanding digital content space, Charchalive stands out as an outlier. It offers
+        curated content, culled from authentic sources and covered with unique context, to add to
+        the ken of the visitors.
       </p>
     </div>
-    <figure class="hero-media" appReveal="right" [revealDelay]="150">
-      <img [src]="images.aboutHero.src" [alt]="images.aboutHero.alt" width="900" height="675" fetchpriority="high" />
+    <figure class="hero-media" data-aos="fade-left" data-aos-delay="200">
+      <img
+        [src]="images.aboutHero.src"
+        [alt]="images.aboutHero.alt"
+        width="900"
+        height="675"
+        fetchpriority="high"
+      />
     </figure>
   </div>
 </section>
 
 <section class="section">
   <div class="container intro">
-    <blockquote appReveal="left">
-      We revel in our pithy content that contains <strong>perspectives rather than prejudices</strong>.
+    <blockquote data-aos="fade-right">
+      We revel in our pithy content that contains
+      <strong>perspectives rather than prejudices</strong>.
     </blockquote>
-    <div appReveal [revealDelay]="120">
+    <div data-aos="fade-left" data-aos-delay="150">
       <p>
-        The wide range — stretching from skin to spirituality — promises to be a delight for today’s youth and
-        even those who nurtured them.
+        The wide range — stretching from skin to spirituality — promises to be a delight for today’s
+        youth and even those who nurtured them.
       </p>
       <p>
         From historical Rajneeti Se Pare to celebrated cases which added a new dimension to Indian
-        jurisprudence; from the latest in science &amp; tech to travel and tourism; and from food recipes to fitness
-        &amp; fashion tips, every section will contribute to any netizen’s quest for an ‘informed and good’ living.
+        jurisprudence; from the latest in science &amp; tech to travel and tourism; and from food
+        recipes to fitness &amp; fashion tips, every section will contribute to any netizen’s quest
+        for an ‘informed and good’ living.
       </p>
     </div>
   </div>
@@ -35,18 +44,20 @@
 
 <section class="section alt">
   <div class="container">
-    <span class="eyebrow" appReveal>What we cover</span>
-    <h2 appReveal [revealDelay]="80">From skin to spirituality</h2>
+    <span class="eyebrow" data-aos="fade-up">What we cover</span>
+    <h2 data-aos="fade-up" data-aos-delay="100">From skin to spirituality</h2>
     <div class="topic-grid">
       @for (s of sections; track s.title; let i = $index) {
-        <article class="topic" appReveal [revealDelay]="(i % 3) * 90">
-          <img [src]="s.image.src" [alt]="s.image.alt" width="600" height="375" loading="lazy" />
-          <div class="topic-body">
-            <span class="num">{{ i < 9 ? '0' : '' }}{{ i + 1 }}</span>
-            <h3>{{ s.title }}</h3>
-            <p>{{ s.text }}</p>
-          </div>
-        </article>
+        <div class="aos-item" data-aos="fade-up" [attr.data-aos-delay]="(i % 3) * 150">
+          <article class="topic">
+            <img [src]="s.image.src" [alt]="s.image.alt" width="600" height="375" loading="lazy" />
+            <div class="topic-body">
+              <span class="num">{{ i < 9 ? '0' : '' }}{{ i + 1 }}</span>
+              <h3>{{ s.title }}</h3>
+              <p>{{ s.text }}</p>
+            </div>
+          </article>
+        </div>
       }
     </div>
   </div>
@@ -54,11 +65,11 @@
 
 <section class="section">
   <div class="container">
-    <span class="eyebrow" appReveal>Signature features</span>
-    <h2 appReveal [revealDelay]="80">More than a feed</h2>
+    <span class="eyebrow" data-aos="fade-up">Signature features</span>
+    <h2 data-aos="fade-up" data-aos-delay="100">More than a feed</h2>
     <div class="feature-grid">
       @for (f of features; track f.title; let i = $index) {
-        <article class="feature" appReveal="zoom" [revealDelay]="i * 120">
+        <article class="feature" data-aos="zoom-in" [attr.data-aos-delay]="i * 150">
           <img [src]="f.image.src" [alt]="f.image.alt" width="700" height="875" loading="lazy" />
           <div class="feature-body">
             <span class="tag">{{ f.tag }}</span>
@@ -73,10 +84,13 @@
 
 <section class="section">
   <div class="container">
-    <div class="cta" appReveal="zoom">
+    <div class="cta" data-aos="zoom-in-up">
       <div>
         <h2>Your go-to digital destination</h2>
-        <p>Charchalive seeks to generate lively conversations over diverse topics. Come, be part of the charcha.</p>
+        <p>
+          Charchalive seeks to generate lively conversations over diverse topics. Come, be part of
+          the charcha.
+        </p>
       </div>
       <div class="cta-actions">
         <a class="btn" routerLink="/team">Meet the team</a>

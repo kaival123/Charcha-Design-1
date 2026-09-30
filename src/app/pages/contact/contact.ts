@@ -2,7 +2,6 @@ import { Component, inject, isDevMode, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IMAGES } from '../../data/images';
 import { SITE } from '../../data/site';
-import { Reveal } from '../../reveal';
 
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 
@@ -12,7 +11,7 @@ const CONTACT_ENDPOINT = '/api/contact';
 
 @Component({
   selector: 'app-contact',
-  imports: [ReactiveFormsModule, Reveal],
+  imports: [ReactiveFormsModule],
   templateUrl: './contact.html',
   styleUrl: './contact.scss',
 })

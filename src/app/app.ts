@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { SITE } from './data/site';
 import { PalettePicker } from './palette-picker/palette-picker';
+import { setupScrollAnimations } from './scroll-animations';
 import { ThemeService } from './theme';
 
 @Component({
@@ -19,6 +20,10 @@ export class App {
   protected readonly scrolled = signal(false);
   protected readonly scrollProgress = signal(0);
   protected readonly themes = inject(ThemeService);
+
+  constructor() {
+    setupScrollAnimations();
+  }
 
   protected readonly themeLabels = {
     system: 'Theme: match system',

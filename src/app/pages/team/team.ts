@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { IMAGES } from '../../data/images';
 import { TEAM } from '../../data/team';
-import { Reveal } from '../../reveal';
 
 @Component({
   selector: 'app-team',
-  imports: [RouterLink, Reveal],
+  imports: [RouterLink],
   templateUrl: './team.html',
   styleUrl: './team.scss',
 })
