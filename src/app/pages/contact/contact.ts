@@ -5,9 +5,9 @@ import { SITE } from '../../data/site';
 
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 
-// Our own PHP handler (public/api/contact.php), deployed alongside the site. It emails the message to
+// Our own Vercel Serverless Function (api/contact.ts), deployed with the site. It emails the message to
 // the inbox configured on the server, so the recipient is never taken from the browser.
-const CONTACT_ENDPOINT = 'api/contact.php';
+const CONTACT_ENDPOINT = '/api/contact';
 
 @Component({
   selector: 'app-contact',
@@ -62,7 +62,7 @@ export class Contact {
       const isJson = res.headers.get('content-type')?.includes('application/json');
       if (!isJson) {
         throw new Error(
-          `${CONTACT_ENDPOINT} did not run (HTTP ${res.status}). It needs a PHP web server — it will not work under "ng serve".`,
+          `${CONTACT_ENDPOINT} did not run (HTTP ${res.status}). It runs on Vercel (or locally with "vercel dev") — not under "ng serve".`,
         );
       }
       const result = (await res.json()) as { success?: boolean; message?: string };

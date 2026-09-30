@@ -47,7 +47,7 @@ describe('Contact', () => {
 
     expect(fetchSpy).toHaveBeenCalledOnce();
     const [url, init] = fetchSpy.mock.calls[0] as [string, RequestInit];
-    expect(url).toBe('api/contact.php');
+    expect(url).toBe('/api/contact');
     const payload = JSON.parse(init.body as string);
     expect(payload).toEqual({
       name: 'Asha Rao',
@@ -71,8 +71,8 @@ describe('Contact', () => {
     expect(el.querySelector<HTMLTextAreaElement>('textarea')!.value).toBe('I would love to contribute a story.');
   });
 
-  it('explains when the PHP handler is not running', async () => {
-    // e.g. under `ng serve`, which answers with the app's HTML instead of running PHP.
+  it('explains when the API function is not running', async () => {
+    // e.g. under `ng serve`, which answers with the app's HTML instead of running the function.
     fetchSpy.mockResolvedValue(new Response('<!doctype html>', { status: 200, headers: { 'Content-Type': 'text/html' } }));
     vi.spyOn(console, 'error').mockImplementation(() => {});
     const { el, fill, submit } = await setup();
@@ -80,7 +80,7 @@ describe('Contact', () => {
     fill();
     await submit();
 
-    expect(el.querySelector('.form-error')?.textContent).toContain('needs a PHP web server');
+    expect(el.querySelector('.form-error')?.textContent).toContain('runs on Vercel');
   });
 
   it('does not send when the form is invalid', async () => {
