@@ -1,0 +1,68 @@
+<button
+  #trigger
+  class="trigger"
+  type="button"
+  aria-haspopup="true"
+  aria-controls="palette-panel"
+  [attr.aria-expanded]="open()"
+  [attr.aria-label]="'Colours: ' + label()"
+  [title]="'Colours: ' + label()"
+  (click)="toggle()"
+>
+  <span
+    class="badge"
+    aria-hidden="true"
+    [style.--b-ring]="themes.colours().ring"
+    [style.--b-fill]="themes.colours().accent"
+    [style.--b-dot]="themes.colours().primary"
+  ></span>
+</button>
+
+@if (open()) {
+  <div id="palette-panel" class="panel" role="dialog" aria-label="Site colours">
+    <p class="title">Palette</p>
+    <ul class="presets">
+      @for (p of palettes; track p.id) {
+        <li>
+          <button
+            type="button"
+            class="preset"
+            [class.selected]="p.id === themes.palette()"
+            [attr.aria-pressed]="p.id === themes.palette()"
+            (click)="choose(p.id)"
+          >
+            <span class="tile" aria-hidden="true" [style.background]="p.background">
+              <span class="badge" [style.--b-ring]="p.ring" [style.--b-fill]="p.accent" [style.--b-dot]="p.primary"></span>
+            </span>
+            <span class="name">{{ p.label }}</span>
+          </button>
+        </li>
+      }
+    </ul>
+
+    <p class="title">Custom colours</p>
+    <ul class="custom">
+      @for (row of customRows; track row.key) {
+        <li>
+          <label class="colour">
+            <span class="swatch" [style.background]="themes.colours()[row.key]">
+              <input
+                type="color"
+                [value]="themes.colours()[row.key]"
+                (input)="onColour(row.key, $event)"
+                [attr.aria-label]="row.label + ' colour'"
+              />
+            </span>
+            <span class="text">
+              <strong>{{ row.label }}</strong>
+              <small>{{ row.hint }}</small>
+            </span>
+            <code>{{ themes.colours()[row.key].toUpperCase() }}</code>
+          </label>
+        </li>
+      }
+    </ul>
+
+    <button type="button" class="reset" (click)="themes.reset()">Reset to logo colours</button>
+  </div>
+}

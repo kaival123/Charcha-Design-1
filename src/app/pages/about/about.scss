@@ -130,8 +130,8 @@ blockquote {
 
   h2 { color: #fff; }
   p { color: #cfc8bb; margin: 0; max-width: 36rem; }
-  .btn { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .btn-ghost { background: transparent; border-color: #fff; }
+  .btn { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .btn-ghost { background: transparent; border-color: #fff; color: #fff; }
   .btn-ghost:hover { background: #fff; color: var(--band); }
 }
 

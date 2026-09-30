@@ -36,7 +36,7 @@
     font-size: 0.9rem;
     color: var(--ink-soft);
 
-    li::before { content: '—'; color: var(--gold); margin-right: 0.5rem; }
+    li::before { content: '—'; color: var(--highlight); margin-right: 0.5rem; }
   }
 
   .more { margin-top: auto; font-weight: 600; font-size: 0.92rem; color: var(--ink); }
