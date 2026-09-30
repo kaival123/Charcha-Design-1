@@ -1,6 +1,9 @@
 /**
  * Charchalive contact form handler — Vercel Serverless Function, served at POST /api/contact.
  *
+ * Plain JavaScript (ES module) on purpose: Vercel runs .mjs files as-is, whereas a .ts file here would be
+ * compiled with the Angular tsconfig ("module": "preserve") and crash on start-up.
+ *
  * Emails the form to the site inbox through your mailbox's SMTP server. Configure it in the Vercel
  * dashboard → Project → Settings → Environment Variables (never in code):
  *
@@ -21,15 +24,18 @@ const SITE_NAME = 'Charchalive';
 const TOPICS = ['General enquiry', 'Aapki Awaaz submission', 'Charcha podcast', 'Partnerships', 'Feedback'];
 const EMAIL_RE = /^[^\s@<>()[\]\\,;:"]+@[^\s@<>()[\]\\,;:"]+\.[^\s@<>()[\]\\,;:"]+$/;
 
-const json = (status: number, success: boolean, message: string) =>
+/** @param {number} status @param {boolean} success @param {string} message */
+const json = (status, success, message) =>
   Response.json({ success, message }, { status, headers: { 'X-Content-Type-Options': 'nosniff' } });
 
 /** One line of text, no line breaks (so it can't smuggle extra email headers), trimmed to a max length. */
-const line = (value: unknown, max: number) =>
+const line = (value, max) =>
   String(value ?? '').replace(/[\r\n\t]+/g, ' ').replace(/\s{2,}/g, ' ').trim().slice(0, max);
 
-export async function POST(request: Request): Promise<Response> {
-  let data: Record<string, unknown>;
+/** @param {Request} request @returns {Promise<Response>} */
+export async function POST(request) {
+  /** @type {Record<string, unknown>} */
+  let data;
   try {
     data = await request.json();
   } catch {
