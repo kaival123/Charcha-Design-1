@@ -2,10 +2,11 @@ import { Component, computed, effect, inject, input } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, RouterLink } from '@angular/router';
 import { TEAM } from '../../data/team';
+import { Reveal } from '../../reveal';
 
 @Component({
   selector: 'app-profile',
-  imports: [RouterLink],
+  imports: [RouterLink, Reveal],
   templateUrl: './profile.html',
   styleUrl: './profile.scss',
 })

@@ -1,6 +1,6 @@
 <section class="page-hero">
   <div class="container hero-split">
-    <div>
+    <div appReveal>
       <span class="eyebrow">Our Team</span>
       <h1>The people behind the conversation</h1>
       <p class="lead">
@@ -8,7 +8,7 @@
         build a thoughtful home for curated content.
       </p>
     </div>
-    <figure class="hero-media">
+    <figure class="hero-media" appReveal="right" [revealDelay]="150">
       <img [src]="hero.src" [alt]="hero.alt" width="900" height="675" fetchpriority="high" />
     </figure>
   </div>
@@ -16,8 +16,8 @@
 
 <section class="section">
   <div class="container grid">
-    @for (m of team; track m.slug) {
-      <a class="card" [routerLink]="['/team', m.slug]">
+    @for (m of team; track m.slug; let i = $index) {
+      <a class="card" appReveal [revealDelay]="i * 110" [routerLink]="['/team', m.slug]">
         @if (m.photo) {
           <img class="monogram" [src]="m.photo" [alt]="m.name" width="144" height="144" />
         } @else {

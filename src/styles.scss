@@ -80,11 +80,16 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  // Deliberately no `scroll-behavior: smooth` here: it made every page change glide slowly back to the
+  // top. The back-to-top button asks for smooth scrolling itself, and page changes cross-fade instead.
+  scroll-behavior: auto;
 }
 
 body {
   margin: 0;
+  // Stops elements sliding in from the side (scroll reveal) from causing a sideways scrollbar.
+  // `clip` (unlike `hidden`) doesn't create a scroll container, so the sticky header still works.
+  overflow-x: clip;
   background: var(--paper);
   color: var(--ink);
   font-family: var(--sans);
@@ -231,4 +236,86 @@ img.monogram {
   height: auto;
   object-fit: cover;
   background: var(--line);
+}
+
+// ---- Scroll reveal (see app/reveal.ts) ---------------------------------------------------------------
+// Uses `translate`/`scale` rather than `transform`, so it never fights a card's own hover transform, and
+// a CSS animation rather than a transition, so components' own `transition` rules can't override it.
+.reveal-pending {
+  // Promote to its own layer only while it waits/animates; the directive removes the class afterwards.
+  will-change: opacity, translate, scale;
+}
+
+.reveal-pending:not(.is-visible) {
+  opacity: 0;
+}
+
+.reveal-pending.is-visible {
+  // Long, gentle ease-out (easeOutQuart): starts softly and settles slowly, no snap at the end.
+  animation: reveal-up 1.1s cubic-bezier(0.25, 1, 0.5, 1) var(--reveal-delay, 0ms) both;
+
+  &[data-reveal='fade'] { animation-name: reveal-fade; }
+  &[data-reveal='left'] { animation-name: reveal-left; }
+  &[data-reveal='right'] { animation-name: reveal-right; }
+  &[data-reveal='zoom'] { animation-name: reveal-zoom; }
+}
+
+@keyframes reveal-up {
+  from { opacity: 0; translate: 0 24px; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+@keyframes reveal-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes reveal-left {
+  from { opacity: 0; translate: -28px 0; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+@keyframes reveal-right {
+  from { opacity: 0; translate: 28px 0; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+@keyframes reveal-zoom {
+  from { opacity: 0; scale: 0.96; }
+  to { opacity: 1; scale: 1; }
+}
+
+// Reduced motion, and printing (where nothing scrolls into view), show everything straight away.
+@media (prefers-reduced-motion: reduce), print {
+  .reveal-pending:not(.is-visible) { opacity: 1; }
+  .reveal-pending.is-visible { animation: none; }
+}
+
+// ---- Page transitions (router withViewTransitions) ----------------------------------------------------
+// Old page fades out while the new one fades up slightly. The sticky header is kept out of the
+// transition so it stays perfectly still between pages.
+::view-transition-old(root) {
+  animation: page-out 0.22s ease-in both;
+}
+
+::view-transition-new(root) {
+  animation: page-in 0.45s cubic-bezier(0.25, 1, 0.5, 1) 0.08s both;
+}
+
+.site-header {
+  view-transition-name: site-header;
+}
+
+@keyframes page-out {
+  to { opacity: 0; }
+}
+
+@keyframes page-in {
+  from { opacity: 0; translate: 0 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  ::view-transition-group(*) { animation: none; }
 }

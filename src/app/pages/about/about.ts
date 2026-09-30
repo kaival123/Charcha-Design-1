@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { IMAGES } from '../../data/images';
+import { Reveal } from '../../reveal';
 
 @Component({
   selector: 'app-about',
-  imports: [RouterLink],
+  imports: [RouterLink, Reveal],
   templateUrl: './about.html',
   styleUrl: './about.scss',
 })

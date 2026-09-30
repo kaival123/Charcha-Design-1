@@ -1,5 +1,5 @@
 <section class="page-hero">
-  <div class="container">
+  <div class="container" appReveal>
     <span class="eyebrow">Photo Credits</span>
     <h1>With thanks to the photographers</h1>
     <p class="lead">
@@ -10,8 +10,8 @@
 
 <section class="section">
   <div class="container list">
-    @for (p of photos; track p.src) {
-      <article class="credit">
+    @for (p of photos; track p.src; let i = $index) {
+      <article class="credit" appReveal [revealDelay]="(i % 2) * 90">
         <img [src]="p.src" [alt]="p.alt" width="160" height="120" loading="lazy" />
         <div>
           <h3><a [href]="p.source" target="_blank" rel="noopener">{{ p.title }}</a></h3>
