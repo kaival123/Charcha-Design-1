@@ -24,9 +24,28 @@ const SITE_NAME = 'Charchalive';
 const TOPICS = ['General enquiry', 'Aapki Awaaz submission', 'Charcha podcast', 'Partnerships', 'Feedback'];
 const EMAIL_RE = /^[^\s@<>()[\]\\,;:"]+@[^\s@<>()[\]\\,;:"]+\.[^\s@<>()[\]\\,;:"]+$/;
 
-/** @param {number} status @param {boolean} success @param {string} message */
-const json = (status, success, message) =>
-  Response.json({ success, message }, { status, headers: { 'X-Content-Type-Options': 'nosniff' } });
+/** @param {number} status @param {boolean} success @param {string} message @param {object} [extra] */
+const json = (status, success, message, extra = {}) =>
+  Response.json({ success, message, ...extra }, { status, headers: { 'X-Content-Type-Options': 'nosniff' } });
+
+/** Plain-English hint for the most common SMTP failures (nodemailer error codes). */
+function smtpHint(err) {
+  const code = err?.code;
+  const reply = String(err?.response ?? err?.message ?? '');
+  if (code === 'EAUTH' || /535|Username and Password not accepted|Invalid login/i.test(reply)) {
+    return 'Login rejected: check SMTP_USER, and that SMTP_PASS is a Gmail App Password (not the normal password).';
+  }
+  if (/5\.7\.0|Application-specific password required/i.test(reply)) {
+    return 'Gmail requires an App Password for this account (turn on 2-Step Verification, then create one).';
+  }
+  if (code === 'ESOCKET' || code === 'ECONNECTION' || code === 'ETIMEDOUT' || code === 'EDNS') {
+    return 'Could not reach the mail server: check SMTP_HOST and SMTP_PORT (Gmail: smtp.gmail.com, 465).';
+  }
+  if (code === 'EENVELOPE' || /^55[0-4]/.test(String(err?.responseCode ?? ''))) {
+    return 'The mail server refused the sender or recipient address: check CONTACT_FROM / CONTACT_TO.';
+  }
+  return 'See the Vercel function logs for details.';
+}
 
 /** One line of text, no line breaks (so it can't smuggle extra email headers), trimmed to a max length. */
 const line = (value, max) =>
@@ -54,7 +73,15 @@ export async function POST(request) {
   if (!EMAIL_RE.test(email)) return json(422, false, 'Please enter a valid email address.');
   if (message.length < 10) return json(422, false, 'Please write at least 10 characters.');
 
-  const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, CONTACT_TO, CONTACT_FROM } = process.env;
+  // Trim everything: values pasted into the Vercel dashboard often pick up stray spaces or line breaks.
+  const env = (key) => (process.env[key] ?? '').trim();
+  const SMTP_HOST = env('SMTP_HOST');
+  const SMTP_PORT = env('SMTP_PORT');
+  const SMTP_USER = env('SMTP_USER');
+  const CONTACT_TO = env('CONTACT_TO');
+  const CONTACT_FROM = env('CONTACT_FROM');
+  // Google shows App Passwords as "abcd efgh ijkl mnop"; the spaces are not part of the password.
+  const SMTP_PASS = /gmail|google/i.test(SMTP_HOST) ? env('SMTP_PASS').replace(/\s+/g, '') : env('SMTP_PASS');
   if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) {
     console.error('Contact form: SMTP_HOST, SMTP_USER and SMTP_PASS must be set in Vercel environment variables.');
     return json(500, false, 'Email is not configured on the server (missing SMTP environment variables).');
@@ -89,7 +116,11 @@ export async function POST(request) {
     });
   } catch (err) {
     console.error('Contact form: sending failed:', err);
-    return json(502, false, 'The mail server could not send the message.');
+    // The error code and hint contain no secrets, and they make setup problems diagnosable from the browser.
+    return json(502, false, 'The mail server could not send the message.', {
+      code: err?.code ?? null,
+      hint: smtpHint(err),
+    });
   }
 
   return json(200, true, 'Message sent.');

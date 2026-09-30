@@ -65,8 +65,11 @@ export class Contact {
           `${CONTACT_ENDPOINT} did not run (HTTP ${res.status}). It runs on Vercel (or locally with "vercel dev") — not under "ng serve".`,
         );
       }
-      const result = (await res.json()) as { success?: boolean; message?: string };
-      if (!res.ok || result.success !== true) throw new Error(result.message || `Request failed (HTTP ${res.status})`);
+      const result = (await res.json()) as { success?: boolean; message?: string; code?: string; hint?: string };
+      if (!res.ok || result.success !== true) {
+        const detail = [result.message, result.code && `[${result.code}]`, result.hint].filter(Boolean).join(' ');
+        throw new Error(detail || `Request failed (HTTP ${res.status})`);
+      }
 
       this.status.set('sent');
       this.form.reset();
