@@ -1,7 +1,13 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, isDevMode, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IMAGES } from '../../data/images';
 import { SITE } from '../../data/site';
+
+type Status = 'idle' | 'sending' | 'sent' | 'error';
+
+// Our own PHP handler (public/api/contact.php), deployed alongside the site. It emails the message to
+// the inbox configured on the server, so the recipient is never taken from the browser.
+const CONTACT_ENDPOINT = 'api/contact.php';
 
 @Component({
   selector: 'app-contact',
@@ -12,7 +18,10 @@ import { SITE } from '../../data/site';
 export class Contact {
   protected readonly hero = IMAGES.contactHero;
   protected readonly site = SITE;
-  protected readonly sent = signal(false);
+  protected readonly status = signal<Status>('idle');
+  /** Technical reason for the last failure; shown only in development builds. */
+  protected readonly errorDetail = signal('');
+  protected readonly devMode = isDevMode();
 
   protected readonly topics = ['General enquiry', 'Aapki Awaaz submission', 'Charcha podcast', 'Partnerships', 'Feedback'];
 
@@ -21,6 +30,8 @@ export class Contact {
     email: ['', [Validators.required, Validators.email]],
     topic: [this.topics[0]],
     message: ['', [Validators.required, Validators.minLength(10)]],
+    // Honeypot: hidden from people, so anything typed here comes from a bot.
+    botcheck: [''],
   });
 
   protected invalid(field: 'name' | 'email' | 'message'): boolean {
@@ -28,13 +39,41 @@ export class Contact {
     return c.invalid && (c.touched || c.dirty);
   }
 
-  protected submit(): void {
+  protected async submit(): Promise<void> {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
-    // TODO: send this.form.getRawValue() to the backend / email service.
-    this.sent.set(true);
-    this.form.reset();
+    if (this.status() === 'sending') return;
+
+    const { name, email, topic, message, botcheck } = this.form.getRawValue();
+    if (botcheck) {
+      this.status.set('sent');
+      return;
+    }
+
+    this.status.set('sending');
+    try {
+      const res = await fetch(CONTACT_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ name, email, topic, message }),
+      });
+      const isJson = res.headers.get('content-type')?.includes('application/json');
+      if (!isJson) {
+        throw new Error(
+          `${CONTACT_ENDPOINT} did not run (HTTP ${res.status}). It needs a PHP web server — it will not work under "ng serve".`,
+        );
+      }
+      const result = (await res.json()) as { success?: boolean; message?: string };
+      if (!res.ok || result.success !== true) throw new Error(result.message || `Request failed (HTTP ${res.status})`);
+
+      this.status.set('sent');
+      this.form.reset();
+    } catch (err) {
+      console.error('Contact form failed to send:', err);
+      this.errorDetail.set(err instanceof Error ? err.message : String(err));
+      this.status.set('error');
+    }
   }
 }

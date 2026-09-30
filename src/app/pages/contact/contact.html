@@ -36,14 +36,15 @@
     </aside>
 
     <div class="form-card">
-      @if (sent()) {
+      @if (status() === 'sent') {
         <div class="success" role="status">
           <h2>Thank you!</h2>
-          <p>Your message has been received. Our team will get back to you shortly.</p>
-          <button class="btn btn-ghost" type="button" (click)="sent.set(false)">Send another message</button>
+          <p>Your message has been sent. Our team will get back to you shortly.</p>
+          <button class="btn btn-ghost" type="button" (click)="status.set('idle')">Send another message</button>
         </div>
       } @else {
         <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+          <input class="botcheck" type="checkbox" formControlName="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <div class="row">
             <label>
               <span>Full name</span>
@@ -78,7 +79,19 @@
             }
           </label>
 
-          <button class="btn" type="submit">Send message →</button>
+          @if (status() === 'error') {
+            <p class="form-error" role="alert">
+              Sorry, your message couldn’t be sent. Please try again, or email us at
+              <a [href]="'mailto:' + site.email">{{ site.email }}</a>.
+              @if (devMode && errorDetail()) {
+                <br /><code>Developer note: {{ errorDetail() }}</code>
+              }
+            </p>
+          }
+
+          <button class="btn" type="submit" [disabled]="status() === 'sending'">
+            {{ status() === 'sending' ? 'Sending…' : 'Send message →' }}
+          </button>
         </form>
       }
     </div>
