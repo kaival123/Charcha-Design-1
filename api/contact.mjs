@@ -29,7 +29,7 @@ const json = (status, success, message, extra = {}) =>
   Response.json({ success, message, ...extra }, { status, headers: { 'X-Content-Type-Options': 'nosniff' } });
 
 /** Plain-English hint for the most common SMTP failures (nodemailer error codes). */
-function smtpHint(err) {
+function smtpHint(err, host) {
   const code = err?.code;
   const reply = String(err?.response ?? err?.message ?? '');
   if (code === 'EAUTH' || /535|Username and Password not accepted|Invalid login/i.test(reply)) {
@@ -38,8 +38,11 @@ function smtpHint(err) {
   if (/5\.7\.0|Application-specific password required/i.test(reply)) {
     return 'Gmail requires an App Password for this account (turn on 2-Step Verification, then create one).';
   }
-  if (code === 'ESOCKET' || code === 'ECONNECTION' || code === 'ETIMEDOUT' || code === 'EDNS') {
-    return 'Could not reach the mail server: check SMTP_HOST and SMTP_PORT (Gmail: smtp.gmail.com, 465).';
+  if (code === 'EDNS') {
+    return `No mail server called "${host}" exists: set SMTP_HOST to the server name, e.g. smtp.gmail.com.`;
+  }
+  if (code === 'ESOCKET' || code === 'ECONNECTION' || code === 'ETIMEDOUT') {
+    return `Could not connect to "${host}": check SMTP_HOST and SMTP_PORT (Gmail: smtp.gmail.com, 465).`;
   }
   if (code === 'EENVELOPE' || /^55[0-4]/.test(String(err?.responseCode ?? ''))) {
     return 'The mail server refused the sender or recipient address: check CONTACT_FROM / CONTACT_TO.';
@@ -87,6 +90,15 @@ export async function POST(request) {
     return json(500, false, 'Email is not configured on the server (missing SMTP environment variables).');
   }
 
+  // A common mix-up is pasting the email address into SMTP_HOST; catch it with a clear message.
+  if (SMTP_HOST.includes('@') || !SMTP_HOST.includes('.')) {
+    console.error(`Contact form: SMTP_HOST "${SMTP_HOST}" is not a server name.`);
+    return json(500, false, 'Email is not configured correctly on the server.', {
+      code: 'BAD_SMTP_HOST',
+      hint: `SMTP_HOST is "${SMTP_HOST}" — it must be a server name such as smtp.gmail.com. Put the email address in SMTP_USER.`,
+    });
+  }
+
   const port = Number(SMTP_PORT) || 465;
   const transporter = nodemailer.createTransport({
     host: SMTP_HOST,
@@ -119,7 +131,7 @@ export async function POST(request) {
     // The error code and hint contain no secrets, and they make setup problems diagnosable from the browser.
     return json(502, false, 'The mail server could not send the message.', {
       code: err?.code ?? null,
-      hint: smtpHint(err),
+      hint: smtpHint(err, SMTP_HOST),
     });
   }
 
