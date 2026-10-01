@@ -1,0 +1,76 @@
+<section class="cta-band" aria-labelledby="footer-cta-title">
+  <div class="container cta-inner" data-aos="fade-up">
+    <div>
+      <span class="eyebrow">Aapki Awaaz</span>
+      <h2 id="footer-cta-title">Join the charcha</h2>
+      <p>Have a story, a perspective, or someone who deserves to be celebrated? We’d love to hear from you.</p>
+    </div>
+    <div class="cta-actions">
+      @if (path() !== '/contact') {
+        <a class="btn" routerLink="/contact">Share your story <span class="arrow" aria-hidden="true">→</span></a>
+      }
+      @if (path() !== '/team') {
+        <a class="btn btn-ghost" routerLink="/team">Meet the team <span class="arrow" aria-hidden="true">→</span></a>
+      }
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="about-col">
+      <a class="brand" routerLink="/about" aria-label="Charchalive home">
+        <img src="images/logo.png" alt="" width="56" height="56" loading="lazy" />
+        <span class="wordmark">Charcha<span>live</span></span>
+      </a>
+      <p class="tagline">{{ site.tagline }}</p>
+      <p class="blurb">{{ site.blurb }}</p>
+
+      @if (site.social.length) {
+        <ul class="social" aria-label="Follow us">
+          @for (s of site.social; track s.url) {
+            <li>
+              <a [href]="s.url" target="_blank" rel="noopener" [attr.aria-label]="s.network">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path [attr.d]="icons[s.network]" /></svg>
+              </a>
+            </li>
+          }
+        </ul>
+      }
+    </div>
+
+    <nav aria-label="Footer">
+      <h3>Explore</h3>
+      <ul>
+        @for (item of explore; track item.path) {
+          <li><a [routerLink]="item.path">{{ item.label }}</a></li>
+        }
+      </ul>
+    </nav>
+
+    <div>
+      <h3>Get in touch</h3>
+      <ul class="contact">
+        <li>
+          <span class="label">Email</span>
+          <a [href]="'mailto:' + site.email">{{ site.email }}</a>
+        </li>
+        <li>
+          <span class="label">Location</span>
+          <span>{{ site.address }}</span>
+        </li>
+        <li>
+          <span class="label">Hours</span>
+          <span>{{ site.hours }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container bottom-bar">
+    <span>© {{ year }} {{ site.name }}. All rights reserved.</span>
+    <span class="bottom-links">
+      <a routerLink="/contact">Contact</a>
+    </span>
+  </div>
+</footer>

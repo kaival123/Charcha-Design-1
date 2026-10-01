@@ -1,5 +1,5 @@
 // Photos are stored locally in /public/images. All come from Wikimedia Commons under the licences
-// below; most require attribution, which the Photo Credits page (/credits) provides.
+// below. Most of these licences require crediting the photographer wherever the photo is shown.
 export interface Photo {
   src: string;
   alt: string;
@@ -55,13 +55,12 @@ export const IMAGES = {
     license: 'CC BY-SA 4.0',
     commonsTitle: 'Supreme Court of India 01.jpg',
   }),
-  science: commons('science', {
-    alt: 'ISRO’s PSLV-C42 rocket lifting off at night from Sriharikota',
-    title: 'PSLV-C42 lift-off, Satish Dhawan Space Centre',
-    author: 'Ministry of Defence, Government of India',
-    license: 'GODL-India',
-    commonsTitle:
-      'Polar Satellite Launch Vehicle (PSLV-C42) of Indian Space Research Organisation (ISRO) lifting off from the Satish Dhawan Space Centre (SDSC) SHAR, Sriharikota, Andhra Pradesh on September 16, 2018.JPG',
+  economy: commons('economy', {
+    alt: 'A row of Indian one-rupee coins on a dark surface',
+    title: 'One Rupee Indian coins',
+    author: 'Reserve Bank of India / Kshitij Gupta',
+    license: 'CC BY-SA 3.0',
+    commonsTitle: 'One Rupee Indian coins.JPG',
   }),
   travel: commons('travel', {
     alt: 'The pink sandstone façade of Hawa Mahal, Jaipur',

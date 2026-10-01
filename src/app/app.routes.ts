@@ -21,10 +21,5 @@ export const routes: Routes = [
     title: 'Contact Us | Charchalive',
     loadComponent: () => import('./pages/contact/contact').then((m) => m.Contact),
   },
-  {
-    path: 'credits',
-    title: 'Photo Credits | Charchalive',
-    loadComponent: () => import('./pages/credits/credits').then((m) => m.Credits),
-  },
   { path: '**', redirectTo: 'about' },
 ];

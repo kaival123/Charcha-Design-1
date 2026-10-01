@@ -20,7 +20,7 @@ export function setupScrollAnimations(): void {
       duration: 1000, // ms each animation takes (AOS allows 50–3000)
       easing: 'ease-in-out',
       offset: 120, // px from the bottom of the screen before an element starts animating
-      once: false, // AOS default: elements animate again when you scroll back to them
+      once: true, // animate each element only the first time it scrolls into view
       // Visitors who ask their device to reduce motion just see the content, with no animation.
       disable: () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
     });

@@ -18,7 +18,7 @@ describe('App', () => {
   it('should render the main navigation', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
-    const links = (fixture.nativeElement as HTMLElement).querySelectorAll('#site-nav a');
+    const links = (fixture.nativeElement as HTMLElement).querySelectorAll('#site-nav a:not(.btn)');
     expect(Array.from(links).map((a) => a.textContent?.trim())).toEqual(['About Us', 'Our Team', 'Contact']);
   });
 });

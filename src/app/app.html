@@ -1,3 +1,11 @@
+<!-- Slim strip above the header; it scrolls away while the header below stays pinned. -->
+<div class="top-strip">
+  <div class="container strip-inner">
+    <span class="strip-tagline">{{ site.tagline }}</span>
+    <a [href]="'mailto:' + site.email">{{ site.email }}</a>
+  </div>
+</div>
+
 <header class="site-header" [class.scrolled]="scrolled()">
   <div class="container bar">
     <a class="brand" routerLink="/about" (click)="menuOpen.set(false)" aria-label="Charchalive home">
@@ -15,9 +23,13 @@
           >{{ item.label }}</a
         >
       }
+      <a class="btn nav-cta" routerLink="/contact" (click)="menuOpen.set(false)">
+        Share your story <span class="arrow" aria-hidden="true">→</span>
+      </a>
     </nav>
 
     <div class="bar-actions">
+      <a class="btn btn-sm header-cta" routerLink="/contact">Share your story</a>
       <app-palette-picker />
 
       <button
@@ -66,36 +78,7 @@
   <router-outlet />
 </main>
 
-<footer class="site-footer">
-  <div class="container footer-grid">
-    <div>
-      <a class="brand" routerLink="/about" aria-label="Charchalive home">
-        <img src="images/logo.png" alt="" width="64" height="64" loading="lazy" />
-        <span class="wordmark">Charcha<span>live</span></span>
-      </a>
-      <p class="tagline">{{ site.tagline }}</p>
-    </div>
-    <div>
-      <h4>Explore</h4>
-      <ul>
-        @for (item of nav; track item.path) {
-          <li><a [routerLink]="item.path">{{ item.label }}</a></li>
-        }
-      </ul>
-    </div>
-    <div>
-      <h4>Get in touch</h4>
-      <ul>
-        <li><a [href]="'mailto:' + site.email">{{ site.email }}</a></li>
-        <li>{{ site.address }}</li>
-      </ul>
-    </div>
-  </div>
-  <div class="container copyright">
-    <span>© {{ year }} {{ site.name }}. All rights reserved.</span>
-    <span><a routerLink="/credits">Photo credits</a></span>
-  </div>
-</footer>
+<app-site-footer />
 
 <button
   class="back-to-top-button"

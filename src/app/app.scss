@@ -40,6 +40,26 @@ main {
   }
 }
 
+.top-strip {
+  background: var(--band);
+  color: #b9b2a6;
+  font-size: 0.8rem;
+
+  a { color: #fff; text-decoration: none; &:hover { color: var(--brand-accent); } }
+
+  @media (max-width: 720px) { display: none; }
+}
+
+.strip-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: 36px;
+}
+
+.strip-tagline { font-family: var(--serif); font-style: italic; }
+
 .site-header {
   position: sticky;
   top: 0;
@@ -67,34 +87,32 @@ main {
 
 nav {
   display: flex;
-  gap: 2rem;
+  gap: var(--space-1);
   margin-left: auto;
 
-  a {
-    position: relative;
+  // Pill-shaped links; the current page is filled with a soft brand tint.
+  a:not(.btn) {
+    padding: 0.55rem 1rem;
+    border-radius: 999px;
     color: var(--ink-soft);
     text-decoration: none;
     font-weight: 500;
     font-size: 0.95rem;
-    padding: 0.4rem 0;
+    transition: background 0.2s, color 0.2s;
 
-    &::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 2px;
-      background: var(--accent);
-      transform: scaleX(0);
-      transition: transform 0.2s;
-    }
-
-    &:hover,
-    &.active { color: var(--ink); }
-    &.active::after,
-    &:hover::after { transform: scaleX(1); }
+    &:hover { color: var(--ink); background: color-mix(in srgb, var(--ink) 5%, transparent); }
+    &.active { color: var(--accent); background: var(--accent-soft); font-weight: 600; }
   }
+
+  // The call-to-action inside the menu only appears in the phone menu.
+  .nav-cta { display: none; }
+}
+
+// Header call-to-action: shown on wide screens only, where there is room for it.
+.header-cta {
+  margin-right: var(--space-2);
+
+  @media (max-width: 1080px) { display: none; }
 }
 
 .bar-actions {
@@ -159,55 +177,13 @@ nav {
     gap: 0;
     background: var(--paper);
     border-bottom: 1px solid var(--line);
-    padding: 0.5rem 20px 1rem;
+    box-shadow: var(--shadow-md);
+    padding: var(--space-3) var(--gutter) var(--space-5);
 
     &.open { display: flex; }
-    a { padding: 0.75rem 0; &::after { display: none; } }
+    a:not(.btn) { padding: 0.85rem 1rem; font-size: 1.05rem; }
+    .nav-cta { display: inline-flex; margin-top: var(--space-4); }
   }
-}
-
-.site-footer {
-  background: var(--band);
-  color: #cfc8bb;
-  padding: 3.5rem 0 1.5rem;
-  margin-top: 2rem;
-  border-top: 4px solid var(--brand-primary);
-
-  .brand { color: #fff; }
-  .brand img { width: 64px; height: 64px; }
-  .tagline { color: #a39c8f; margin-top: 0.5rem; }
-
-  h4 {
-    font-family: var(--sans);
-    font-size: 0.78rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: #fff;
-    margin: 0 0 1rem;
-  }
-
-  ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
-  a { color: #cfc8bb; text-decoration: none; &:hover { color: #fff; } }
-}
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 2rem;
-
-  @media (max-width: 720px) { grid-template-columns: 1fr; }
-}
-
-.copyright {
-  margin-top: 2.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid #36332d;
-  font-size: 0.85rem;
-  color: #8a8377;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 0.5rem;
 }
 
 .back-to-top-button {

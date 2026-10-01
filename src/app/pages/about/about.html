@@ -1,33 +1,55 @@
-<section class="page-hero">
-  <div class="container hero-split">
-    <div data-aos="fade-right">
-      <span class="eyebrow">About Us</span>
-      <h1>Curated content with <em>context</em>, not clutter.</h1>
-      <p class="lead">
+<!-- ============ Full-width banner ============ -->
+<section class="banner banner--tall">
+  <img
+    class="banner-bg"
+    [src]="images.aboutHero.src"
+    [alt]="images.aboutHero.alt"
+    width="1600"
+    height="900"
+    fetchpriority="high"
+  />
+  <div class="container-fluid banner-inner">
+    <div class="banner-content">
+      <span class="eyebrow" data-aos="fade-up">About Us</span>
+      <h1 data-aos="fade-up" data-aos-delay="100">Curated content with <em>context</em>, not clutter.</h1>
+      <p class="lead" data-aos="fade-up" data-aos-delay="200">
         In the ever-expanding digital content space, Charchalive stands out as an outlier. It offers
         curated content, culled from authentic sources and covered with unique context, to add to
         the ken of the visitors.
       </p>
+      <div class="actions" data-aos="fade-up" data-aos-delay="300">
+        <a class="btn" routerLink="/about" fragment="sections">
+          Explore our sections <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="btn btn-ghost" routerLink="/team">Meet the team</a>
+      </div>
     </div>
-    <figure class="hero-media" data-aos="fade-left" data-aos-delay="200">
-      <img
-        [src]="images.aboutHero.src"
-        [alt]="images.aboutHero.alt"
-        width="900"
-        height="675"
-        fetchpriority="high"
-      />
-    </figure>
   </div>
 </section>
 
+<!-- ============ Three pillars, full width ============ -->
+<section class="pillar-strip">
+  <ul class="container-fluid pillars">
+    @for (p of pillars; track p.title; let i = $index) {
+      <li data-aos="fade-up" [attr.data-aos-delay]="i * 100">
+        <span class="pillar-no">0{{ i + 1 }}</span>
+        <strong>{{ p.title }}</strong>
+        <span>{{ p.text }}</span>
+      </li>
+    }
+  </ul>
+</section>
+
+<!-- ============ Pull-quote and two-column intro ============ -->
 <section class="section">
   <div class="container intro">
-    <blockquote data-aos="fade-right">
-      We revel in our pithy content that contains
-      <strong>perspectives rather than prejudices</strong>.
-    </blockquote>
-    <div data-aos="fade-left" data-aos-delay="150">
+    <figure class="pullquote" data-aos="fade-up">
+      <blockquote>
+        We revel in our pithy content that contains
+        <strong>perspectives rather than prejudices</strong>.
+      </blockquote>
+    </figure>
+    <div class="columns" data-aos="fade-up" data-aos-delay="100">
       <p>
         The wide range — stretching from skin to spirituality — promises to be a delight for today’s
         youth and even those who nurtured them.
@@ -42,15 +64,29 @@
   </div>
 </section>
 
-<section class="section alt">
+<!-- ============ Sections: bento grid with one featured story ============ -->
+<section class="section tint" id="sections">
   <div class="container">
-    <span class="eyebrow" data-aos="fade-up">What we cover</span>
-    <h2 data-aos="fade-up" data-aos-delay="100">From skin to spirituality</h2>
-    <div class="topic-grid">
+    <div class="section-head split" data-aos="fade-up">
+      <span class="eyebrow"><span class="no">01</span>What we cover</span>
+      <h2>From skin to spirituality</h2>
+      <p class="lead">
+        Every section will contribute to any netizen’s quest for an ‘informed and good’ living.
+      </p>
+    </div>
+
+    <div class="bento">
       @for (s of sections; track s.title; let i = $index) {
-        <div class="aos-item" data-aos="fade-up" [attr.data-aos-delay]="(i % 3) * 150">
-          <article class="topic">
-            <img [src]="s.image.src" [alt]="s.image.alt" width="600" height="375" loading="lazy" />
+        <div
+          class="aos-item"
+          [class.featured]="i === 0"
+          data-aos="fade-up"
+          [attr.data-aos-delay]="(i % 3) * 100"
+        >
+          <article class="topic" [class.featured]="i === 0">
+            <div class="topic-media">
+              <img [src]="s.image.src" [alt]="s.image.alt" width="600" height="375" loading="lazy" />
+            </div>
             <div class="topic-body">
               <span class="num">{{ i < 9 ? '0' : '' }}{{ i + 1 }}</span>
               <h3>{{ s.title }}</h3>
@@ -63,39 +99,32 @@
   </div>
 </section>
 
+<!-- ============ Signature features: alternating spotlights ============ -->
 <section class="section">
   <div class="container">
-    <span class="eyebrow" data-aos="fade-up">Signature features</span>
-    <h2 data-aos="fade-up" data-aos-delay="100">More than a feed</h2>
-    <div class="feature-grid">
+    <div class="section-head split" data-aos="fade-up">
+      <span class="eyebrow"><span class="no">02</span>Signature features</span>
+      <h2>More than a feed</h2>
+      <p class="lead">
+        Charchalive seeks to be your go-to digital destination by generating lively conversations
+        over diverse topics.
+      </p>
+    </div>
+
+    <div class="spotlights">
       @for (f of features; track f.title; let i = $index) {
-        <article class="feature" data-aos="zoom-in" [attr.data-aos-delay]="i * 150">
-          <img [src]="f.image.src" [alt]="f.image.alt" width="700" height="875" loading="lazy" />
-          <div class="feature-body">
+        <article class="spotlight" [class.reverse]="i % 2 === 1">
+          <div class="spot-media" [attr.data-aos]="i % 2 === 1 ? 'fade-left' : 'fade-right'">
+            <img [src]="f.image.src" [alt]="f.image.alt" width="700" height="875" loading="lazy" />
+          </div>
+          <div class="spot-body" data-aos="fade-up" data-aos-delay="150">
+            <span class="spot-no">0{{ i + 1 }}</span>
             <span class="tag">{{ f.tag }}</span>
             <h3>{{ f.title }}</h3>
             <p>{{ f.text }}</p>
           </div>
         </article>
       }
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="cta" data-aos="zoom-in-up">
-      <div>
-        <h2>Your go-to digital destination</h2>
-        <p>
-          Charchalive seeks to generate lively conversations over diverse topics. Come, be part of
-          the charcha.
-        </p>
-      </div>
-      <div class="cta-actions">
-        <a class="btn" routerLink="/team">Meet the team</a>
-        <a class="btn btn-ghost" routerLink="/contact">Contact us</a>
-      </div>
     </div>
   </div>
 </section>

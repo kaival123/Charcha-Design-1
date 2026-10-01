@@ -3,18 +3,18 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { SITE } from './data/site';
 import { PalettePicker } from './palette-picker/palette-picker';
 import { setupScrollAnimations } from './scroll-animations';
+import { SiteFooter } from './site-footer/site-footer';
 import { ThemeService } from './theme';
 
 @Component({
   host: { '(window:scroll)': 'onScroll()' },
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, PalettePicker],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, PalettePicker, SiteFooter],
   selector: 'app-root',
   styleUrl: './app.scss',
   templateUrl: './app.html',
 })
 export class App {
   protected readonly site = SITE;
-  protected readonly year = new Date().getFullYear();
   protected readonly menuOpen = signal(false);
   protected readonly showTop = signal(false);
   protected readonly scrolled = signal(false);
