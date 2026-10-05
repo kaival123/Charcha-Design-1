@@ -1,0 +1,57 @@
+// A box centred on the logo + wordmark and a little taller than them. Everything inside is sized from the
+// box itself (container units), so the glyphs scale with the brand on every screen size.
+:host {
+  position: absolute;
+  top: 45%;
+  left: 30px;
+  right: -1.5rem;
+  height: 160%;
+  translate: 0 -50%;
+  container-type: size;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  // Soft edges so glyphs fade out instead of being cut off.
+  mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+}
+
+.goo {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  filter: url(#brand-goo);
+}
+
+.word {
+  grid-area: 1 / 1;
+  color: var(--brand-accent, #b2db00);
+  font-family: 'Nirmala UI', 'Noto Sans', 'Segoe UI', system-ui, sans-serif;
+  // Fit the box: limited by its height, and by its width for wide scripts (--w is the word's width in em).
+  font-size: min(70cqh, calc(66cqw / var(--w, 3)));
+  font-weight: 900;
+  line-height: 1;
+  white-space: nowrap;
+  // Indic glyph ink sits high in its line box; nudge it to the visual centre.
+  translate: 0 0.1em;
+  opacity: 0;
+  animation: glyph-life ease-in-out both;
+}
+
+// Form out of a blur, hold, melt away while the next script forms (the goo filter fuses them).
+// No scaling: the letters stay the same size and just change shape in place.
+@keyframes glyph-life {
+  0% { opacity: 0; filter: blur(8px); }
+  22% { opacity: 1; filter: blur(0); }
+  58% { opacity: 1; filter: blur(0); }
+  100% { opacity: 0; filter: blur(8px); }
+}
+
+// Phones: the box covers the wordmark, so just keep it from poking past the screen edge.
+@media (max-width: 480px) {
+  :host { left: -0.5rem; right: -0.75rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .word { animation: none; opacity: 1; }
+}

@@ -1,0 +1,15 @@
+<!-- Blur, then snap the alpha: soft edges fuse into liquid blobs, so one script visibly melts into the next. -->
+<svg width="0" height="0" focusable="false" style="position: absolute">
+  <defs>
+    <filter id="brand-goo" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2.4" result="b" />
+      <feColorMatrix in="b" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9" />
+    </filter>
+  </defs>
+</svg>
+
+<div class="goo">
+  @for (s of shown(); track s.id) {
+    <span class="word" [attr.lang]="s.word.lang" [attr.dir]="s.word.rtl ? 'rtl' : null" [style.--w]="s.word.w" [style.animation-duration.ms]="life">{{ s.word.text }}</span>
+  }
+</div>

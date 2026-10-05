@@ -1,5 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { BrandWords } from './brand-words/brand-words';
 import { SITE } from './data/site';
 import { PalettePicker } from './palette-picker/palette-picker';
 import { setupScrollAnimations } from './scroll-animations';
@@ -8,7 +9,7 @@ import { ThemeService } from './theme';
 
 @Component({
   host: { '(window:scroll)': 'onScroll()' },
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, PalettePicker, SiteFooter],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, PalettePicker, SiteFooter, BrandWords],
   selector: 'app-root',
   styleUrl: './app.scss',
   templateUrl: './app.html',

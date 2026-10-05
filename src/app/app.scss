@@ -9,6 +9,7 @@ main {
 }
 
 .brand {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 0.7rem;
@@ -19,7 +20,12 @@ main {
   text-decoration: none;
   letter-spacing: -0.02em;
 
+  // Logo and wordmark stay above the animated words.
+  img,
+  .wordmark { position: relative; z-index: 1; }
+
   img {
+    // display: none;
     width: 52px;
     height: 52px;
     background: none;
@@ -29,14 +35,15 @@ main {
   .wordmark span { color: var(--accent); }
 
   // Leave room for the palette, theme and menu buttons on phones.
-  @media (max-width: 420px) {
+  @media (max-width: 480px) {
     gap: 0.5rem;
     font-size: 1.3rem;
-    img { width: 44px; height: 44px; }
+    // The wordmark carries the brand on phones; the animated words sit behind it.
+    img { display: none; }
   }
-  // On the smallest phones the logo (which reads "चर्चा Live.com") stands alone in the header.
+  // Smallest phones (320px): tighten the wordmark so it fits beside the palette, theme and menu buttons.
   @media (max-width: 359px) {
-    .site-header & .wordmark { display: none; }
+    font-size: 1.15rem;
   }
 }
 

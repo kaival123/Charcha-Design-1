@@ -122,6 +122,8 @@ html {
   // Deliberately no `scroll-behavior: smooth` here: it made every page change glide slowly back to the
   // top. The back-to-top button asks for smooth scrolling itself, and page changes cross-fade instead.
   scroll-behavior: auto;
+  // Same guard as on `body`, at the root, so nothing parked off-screen can ever add a sideways scrollbar.
+  overflow-x: clip;
 }
 
 body {
