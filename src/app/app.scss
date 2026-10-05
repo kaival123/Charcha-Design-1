@@ -172,7 +172,7 @@ nav {
 
 @media (max-width: 720px) {
   .menu-toggle { display: flex; }
-  .bar { gap: 0.75rem; }
+  .bar { gap: 0.75rem; height: 80px; }
 
   nav {
     display: none;

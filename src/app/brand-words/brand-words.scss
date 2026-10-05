@@ -50,7 +50,7 @@
 // Phones: the box covers the wordmark, so keep it from poking past the screen edge, and make the
 // letters bigger so they stay easy to see at the smaller header size.
 @media (max-width: 480px) {
-  :host { left: -0.5rem; right: -0.75rem; }
+  :host { left: -0.5rem; right: -0.75rem;  top: 40%; height: 200%; }
   .word { font-size: min(85cqh, calc(92cqw / var(--w, 3))); }
 }
 
