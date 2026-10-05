@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FEATURES, SECTIONS } from '../../data/content';
 import { IMAGES } from '../../data/images';
+import { CharchaJourney } from '../../charcha-journey/charcha-journey';
 
 @Component({
   selector: 'app-about',
-  imports: [RouterLink],
+  imports: [RouterLink, CharchaJourney],
   templateUrl: './about.html',
   styleUrl: './about.scss',
 })

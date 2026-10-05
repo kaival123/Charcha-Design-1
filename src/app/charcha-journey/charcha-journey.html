@@ -1,0 +1,40 @@
+<section class="journey" #section aria-labelledby="journey-title">
+  <div class="pin">
+    <div class="track" #track>
+      <!-- Opening card -->
+      <div class="intro">
+        <span class="eyebrow">The Charchalive journey</span>
+        <h2 id="journey-title">From source to <em>conversation</em></h2>
+        <p class="lead">Follow one story on its way to you. Keep scrolling.</p>
+        <span class="hint" aria-hidden="true">Scroll <i></i></span>
+      </div>
+
+      @for (s of scenes; track s.step; let i = $index) {
+        <div class="scene" [class.flip]="i % 2 === 1" [style.--i]="i">
+          <figure class="photo">
+            <img [src]="s.image.src" [alt]="s.image.alt" width="800" height="900" loading="lazy" />
+          </figure>
+          <div class="caption">
+            <span class="step">{{ s.step }}</span>
+            <h3>{{ s.title }}</h3>
+            <p>{{ s.text }}</p>
+          </div>
+
+          @if (i < scenes.length - 1) {
+            <!-- Hand-drawn arrow to the next scene; it draws itself as you scroll past. -->
+            <svg class="arrow" viewBox="0 0 220 90" aria-hidden="true">
+              <path pathLength="1" d="M6 70 C 50 4, 150 4, 212 56" />
+              <path pathLength="1" class="head" d="M196 62 L213 57 L204 42" />
+            </svg>
+          }
+        </div>
+      }
+
+      <!-- Closing card -->
+      <div class="outro">
+        <h3>Your turn to join the charcha.</h3>
+        <a class="btn" routerLink="/contact">Share your story <span class="arrow-icon" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
