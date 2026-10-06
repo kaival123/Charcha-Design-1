@@ -7,7 +7,7 @@
 main {
   flex: 1;
 }
-
+.visibility_hidden { visibility: hidden; }
 .brand {
   position: relative;
   display: inline-flex;
@@ -39,7 +39,7 @@ main {
     gap: 0.5rem;
     font-size: 1.3rem;
     // The wordmark carries the brand on phones; the animated words sit behind it.
-    img { display: none; }
+    img { display: block; }
   }
   // Smallest phones (320px): tighten the wordmark so it fits beside the palette, theme and menu buttons.
   @media (max-width: 359px) {
