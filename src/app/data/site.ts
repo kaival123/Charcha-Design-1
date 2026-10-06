@@ -1,7 +1,7 @@
 // Contact details were not in the supplied content — replace these placeholders before going live.
 export const SITE = {
   name: 'Charchalive',
-  tagline: 'Perspectives, not prejudices.',
+  tagline: 'Potato Chips To Micro Chips.',
   blurb: 'Curated content culled from authentic sources and covered with unique context.',
   email: 'contact@charchalive.com',
   address: 'New Delhi, India',
