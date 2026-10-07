@@ -55,7 +55,7 @@
   --space-6: 2rem;     // 32px
   --space-7: 3rem;     // 48px
   --space-8: 4rem;     // 64px
-  --section-y: clamp(4rem, 9vw, 7rem); // vertical padding of a page section
+  --section-y: clamp(4rem, 9vw, 5rem); // vertical padding of a page section
 
   // ---- Type scale (fluid between phone and desktop)
   --fs-display: clamp(2.5rem, 5.4vw, 4.25rem);
@@ -164,7 +164,10 @@ p { margin: 0 0 1.1em; color: var(--ink-soft); text-wrap: pretty; }
   color: var(--ink-soft);
   max-width: 42rem;
 }
-
+.main-page{
+  min-height: 100vh;
+  min-height: 100dvh;
+}
 a { color: var(--accent); }
 
 img {

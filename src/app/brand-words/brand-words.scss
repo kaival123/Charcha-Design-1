@@ -25,7 +25,8 @@
 
 .word {
   grid-area: 1 / 1;
-  color: var(--brand-accent, #b2db00);
+  // The lime accent is too pale on the light header to read, so darken it for contrast.
+  color: color-mix(in srgb, var(--brand-accent, #b2db00) 0%, #000);
   font-family: 'Nirmala UI', 'Noto Sans', 'Segoe UI', system-ui, sans-serif;
   // Fit the box: limited by its height, and by its width for wide scripts (--w is the word's width in em).
   font-size: min(70cqh, calc(66cqw / var(--w, 3)));
@@ -38,12 +39,15 @@
   animation: glyph-life ease-in-out both;
 }
 
+// On the dark theme the plain lime already has plenty of contrast.
+:host-context([data-theme="dark"]) .word { color: var(--brand-accent, #b2db00); }
+
 // Form out of a blur, hold, melt away while the next script forms (the goo filter fuses them).
 // No scaling: the letters stay the same size and just change shape in place.
 @keyframes glyph-life {
   0% { opacity: 0; filter: blur(8px); }
-  22% { opacity: 1; filter: blur(0); }
-  58% { opacity: 1; filter: blur(0); }
+  18% { opacity: 1; filter: blur(0); }
+  68% { opacity: 1; filter: blur(0); }
   100% { opacity: 0; filter: blur(8px); }
 }
 
@@ -57,6 +61,8 @@
       height: 140%;
     }
   .word { font-size: min(85cqh, calc(92cqw / var(--w, 3))); }
+  // The box is narrow here, so fade only a sliver at each edge or the letters get eaten.
+  :host { mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); }
 }
 
 @media (prefers-reduced-motion: reduce) {

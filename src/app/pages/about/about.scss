@@ -32,7 +32,7 @@
       padding: var(--space-4) 0;
       border-left: 0;
     }
-    li + li { border-top: 1px solid var(--line); }
+    li + li { border-left: 0; border-top: 1px solid var(--line); }
   }
 }
 

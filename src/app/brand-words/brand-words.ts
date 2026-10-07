@@ -29,8 +29,8 @@ const WORDS: Word[] = [
   { text: 'छलफल', w: 3.31, lang: 'ne' },
 ];
 
-const STEP_MS = 1000; // matches the reference: a new script every second
-const LIFE_MS = 1500; // form, brief hold, melt; the half-second overlap is the morph between scripts
+const STEP_MS = 1800; // a new script every 1.8 seconds (medium pace)
+const LIFE_MS = 2600; // form, hold, melt; the overlap with the next script is the morph
 
 /**
  * Big soft-lavender glyphs behind the header logo. Each script's word swells out of a blur, holds, then melts away while the next one forms. A "gooey" SVG
