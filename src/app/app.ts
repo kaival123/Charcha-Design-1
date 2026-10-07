@@ -4,6 +4,7 @@ import { BrandWords } from './brand-words/brand-words';
 import { SITE } from './data/site';
 import { PalettePicker } from './palette-picker/palette-picker';
 import { setupScrollAnimations } from './scroll-animations';
+import { setupSmoothScroll } from './smooth-scroll';
 import { SiteFooter } from './site-footer/site-footer';
 import { ThemeService } from './theme';
 
@@ -21,6 +22,7 @@ export class App {
   protected readonly scrolled = signal(false);
   protected readonly scrollProgress = signal(0);
   protected readonly themes = inject(ThemeService);
+  private readonly smoothScroll = setupSmoothScroll();
 
   constructor() {
     setupScrollAnimations();
@@ -40,7 +42,7 @@ export class App {
   }
 
   protected scrollToTop(): void {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.smoothScroll.scrollTo(0);
   }
 
   protected readonly nav = [

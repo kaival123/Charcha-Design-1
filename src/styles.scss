@@ -119,11 +119,23 @@
 }
 
 html {
-  // Deliberately no `scroll-behavior: smooth` here: it made every page change glide slowly back to the
-  // top. The back-to-top button asks for smooth scrolling itself, and page changes cross-fade instead.
-  scroll-behavior: auto;
+  // Smooth in-page scrolling (anchor links, back-to-top). smooth-scroll.ts turns it off for the moment a page
+  // change happens, so changing page still jumps to the top instead of gliding.
+  scroll-behavior: smooth;
+  // Keep anchor targets clear of the sticky header.
+  scroll-padding-top: 5rem;
   // Same guard as on `body`, at the root, so nothing parked off-screen can ever add a sideways scrollbar.
   overflow-x: clip;
+}
+
+// Lenis (smooth-scroll.ts) takes over scrolling while it runs, so the browser's own smoothing must be off.
+html.lenis,
+html.lenis body { height: auto; }
+html.lenis-smooth { scroll-behavior: auto !important; }
+html.lenis-stopped { overflow: hidden; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }
 
 body {
