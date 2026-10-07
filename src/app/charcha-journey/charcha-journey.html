@@ -12,7 +12,7 @@
       @for (s of scenes; track s.step; let i = $index) {
         <div class="scene" [class.flip]="i % 2 === 1" [style.--i]="i">
           <figure class="photo">
-            <img [src]="s.image.src" [alt]="s.image.alt" width="800" height="900" loading="lazy" />
+            <img [src]="s.image.src" [alt]="s.image.title" width="800" height="900" loading="lazy" />
           </figure>
           <div class="caption">
             <span class="step">{{ s.step }}</span>

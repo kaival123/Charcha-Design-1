@@ -3,7 +3,7 @@
   <img
     class="banner-bg"
     [src]="images.aboutHero.src"
-    [alt]="images.aboutHero.alt"
+    [alt]="images.aboutHero.title"
     width="1600"
     height="900"
     fetchpriority="high"
@@ -43,13 +43,13 @@
 <!-- ============ Pull-quote and two-column intro ============ -->
 <section class="section">
   <div class="container intro-wrap">
-    <div class="deco deco-left" aria-hidden="true">
+    <div class="deco deco-left">
       <figure class="photo arch" data-aos="fade-right">
-        <img src="images/side-parliament.jpg" alt="" loading="lazy" />
+        <img src="images/side-parliament.jpg" alt="Side Parliament" loading="lazy" />
         <figcaption>Rajneeti Se Pare</figcaption>
       </figure>
       <figure class="photo" data-aos="fade-right" data-aos-delay="150">
-        <img src="images/side-law.jpg" alt="" loading="lazy" />
+        <img src="images/side-law.jpg" alt="Side Law" loading="lazy" />
         <figcaption>Bhartiya Nyayshastra</figcaption>
       </figure>
     </div>
@@ -73,13 +73,13 @@
         </p>
       </div>
     </div>
-    <div class="deco deco-right" aria-hidden="true">
+    <div class="deco deco-right">
       <figure class="photo arch" data-aos="fade-left">
-        <img src="images/side-travel.jpg" alt="" loading="lazy" />
+        <img src="images/side-travel.jpg" alt="Side Travel" loading="lazy" />
         <figcaption>Yayawar Ki Dairy</figcaption>
       </figure>
       <figure class="photo" data-aos="fade-left" data-aos-delay="150">
-        <img src="images/side-food.jpg" alt="" loading="lazy" />
+        <img src="images/side-food.jpg" alt="Side Food" loading="lazy" />
         <figcaption>Khao Gali</figcaption>
       </figure>
     </div>
@@ -110,7 +110,7 @@
         >
           <article class="topic" [class.featured]="i === 0">
             <div class="topic-media">
-              <img [src]="s.image.src" [alt]="s.image.alt" width="600" height="375" loading="lazy" />
+              <img [src]="s.image.src" [alt]="s.image.title" width="600" height="375" loading="lazy" />
             </div>
             <div class="topic-body">
               <span class="num">{{ i < 9 ? '0' : '' }}{{ i + 1 }}</span>
@@ -140,7 +140,7 @@
       @for (f of features; track f.title; let i = $index) {
         <article class="spotlight" [class.reverse]="i % 2 === 1">
           <div class="spot-media" [attr.data-aos]="i % 2 === 1 ? 'fade-left' : 'fade-right'">
-            <img [src]="f.image.src" [alt]="f.image.alt" width="700" height="875" loading="lazy" />
+            <img [src]="f.image.src" [alt]="f.image.title" width="700" height="875" loading="lazy" />
           </div>
           <div class="spot-body" data-aos="fade-up" data-aos-delay="150">
             <span class="spot-no">0{{ i + 1 }}</span>
