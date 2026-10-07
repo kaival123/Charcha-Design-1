@@ -37,8 +37,113 @@
 }
 
 // ================= Pull-quote and two-column intro =================
+// Mobile first: text on top, the four photos in a 2 x 2 grid below. 600px+: one row of four.
+// 1200px+: photos move to the sides of the text (two stacked on each side).
+.intro-wrap {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.75rem, 2.5vw, 1.25rem);
+  align-items: center;
+
+  // Photos slide in from the sides; keep that from ever causing a sideways scrollbar.
+  overflow-x: clip;
+
+  .intro { grid-column: 1 / -1; order: -1; }
+
+  @media (min-width: 600px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  @media (min-width: 1200px) {
+    max-width: 1700px;
+    grid-template-columns: clamp(160px, 13vw, 260px) minmax(0, 980px) clamp(160px, 13vw, 260px);
+    justify-content: center;
+    gap: clamp(1.5rem, 3vw, 3rem);
+
+    .intro { grid-column: auto; order: 0; }
+  }
+}
+
 .intro {
   max-width: 980px;
+}
+
+// ---- Side photo cards ----
+// Below 1200px the wrappers disappear so the four photos sit directly in .intro-wrap's grid.
+.deco {
+  display: contents;
+
+  @media (min-width: 1200px) {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1rem, 1.6vw, 1.75rem);
+    &.deco-left .photo:nth-child(2) { margin-left: clamp(1rem, 1.8vw, 2rem); }
+    &.deco-right .photo:nth-child(2) { margin-right: clamp(1rem, 1.8vw, 2rem); }
+  }
+}
+
+.photo {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--accent-soft);
+  box-shadow: 0 18px 40px -12px rgba(20, 16, 10, 0.35);
+
+  // The first photo on each side gets an arched top for a more editorial look.
+  &.arch { border-radius: 999px 999px 12px 12px; }
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+  }
+  &:hover img { transform: scale(1.06); }
+
+  // Soft dark gradient at the bottom so the caption stays readable on any photo.
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgba(15, 12, 8, 0.78));
+    pointer-events: none;
+  }
+  // Thin inset keyline for a printed look.
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    z-index: 1;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  figcaption {
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    bottom: clamp(10px, 1.2vw, 16px);
+    z-index: 2;
+    color: #fff;
+    font-size: clamp(0.56rem, 1.6vw, 0.7rem);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-align: center;
+    text-transform: uppercase;
+
+    &::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 2px;
+      margin: 0 auto 7px;
+      background: #f3d94a;
+    }
+  }
 }
 
 .pullquote {

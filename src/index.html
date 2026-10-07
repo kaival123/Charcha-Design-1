@@ -2,8 +2,51 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Charchalive</title>
-  <meta name="description" content="Charchalive — curated content from authentic sources, with perspectives rather than prejudices.">
+  <!--
+    Default SEO tags, for crawlers and link-preview bots that do not run JavaScript. In the browser the
+    SeoService (src/app/seo) rewrites these in place for each route, so there are no duplicates.
+  -->
+  <title>About Charcha Live | Curated Content With Context</title>
+  <meta name="description" content="Charcha Live curates content from authentic sources with unique context, from Rajneeti and jurisprudence to the economy, travel, food and fitness.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://charchalive.com/about">
+  <meta property="og:site_name" content="Charcha Live">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="About Charcha Live | Curated Content With Context">
+  <meta property="og:description" content="Charcha Live curates content from authentic sources with unique context, from Rajneeti and jurisprudence to the economy, travel, food and fitness.">
+  <meta property="og:url" content="https://charchalive.com/about">
+  <meta property="og:image" content="https://charchalive.com/images/about-hero.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="About Charcha Live | Curated Content With Context">
+  <meta name="twitter:description" content="Charcha Live curates content from authentic sources with unique context, from Rajneeti and jurisprudence to the economy, travel, food and fitness.">
+  <meta name="twitter:image" content="https://charchalive.com/images/about-hero.jpg">
+  <!-- Site-wide structured data. Per-page JSON-LD (WebPage, BreadcrumbList, Person) is added by SeoService. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://charchalive.com/#organization",
+        "name": "Charcha Live",
+        "alternateName": "Charchalive",
+        "url": "https://charchalive.com/",
+        "logo": "https://charchalive.com/images/logo.png",
+        "slogan": "Potato Chips To Micro Chips."
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://charchalive.com/#website",
+        "url": "https://charchalive.com/",
+        "name": "Charcha Live",
+        "alternateName": "Charchalive",
+        "inLanguage": "en-IN",
+        "publisher": { "@id": "https://charchalive.com/#organization" }
+      }
+    ]
+  }
+  </script>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script>

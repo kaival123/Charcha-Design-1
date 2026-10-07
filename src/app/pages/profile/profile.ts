@@ -1,5 +1,4 @@
 import { Component, computed, effect, inject, input } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { Router, RouterLink } from '@angular/router';
 import { TEAM } from '../../data/team';
 
@@ -11,7 +10,6 @@ import { TEAM } from '../../data/team';
 })
 export class Profile {
   private readonly router = inject(Router);
-  private readonly titleService = inject(Title);
 
   /** Bound from the `:slug` route param. */
   readonly slug = input.required<string>();
@@ -22,11 +20,8 @@ export class Profile {
   constructor() {
     effect(() => {
       const m = this.member();
-      if (m) {
-        this.titleService.setTitle(`${m.name} | Charchalive`);
-      } else {
-        this.router.navigate(['/team']);
-      }
+      // The page title and meta tags come from the route's SEO settings (see app.routes.ts).
+      if (!m) this.router.navigate(['/team']);
     });
   }
 }
