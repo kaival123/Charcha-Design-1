@@ -300,7 +300,7 @@
     pointer-events: none;
   }
 
-  // Katha drawing (book, lotus, flame) bleeding off the right edge, next to the Katha row.
+  // Katha drawing (book, lotus, flame) bleeding off the right edge, next to the Katha row. 
   &::after {
     content: '';
     position: absolute;
