@@ -288,41 +288,47 @@
   position: relative;
   overflow: hidden;
 
+  // Microphone / bubbles drawing on the left.
   &::before {
     content: '';
     position: absolute;
     top: 40%;
-    left: -50px;
-    width: clamp(240px, 28vw, 450px);
+    left: -2.6vw;
+    width: clamp(110px, 24vw, 450px);
     aspect-ratio: 480 / 360;
     background: url(/images/features-voices.svg) right top / contain no-repeat;
     opacity: 0.45;
     pointer-events: none;
   }
 
-  // Katha drawing (book, lotus, flame) bleeding off the right edge, next to the Katha row. 
+  // Katha drawing (book, lotus, flame) bleeding off the right edge, next to the Katha row.
   &::after {
     content: '';
     position: absolute;
     top: 5%;
-    right: -130px;
-    width: clamp(240px, 48vw, 650px);
+    right: -6.8vw;
+    width: clamp(130px, 34vw, 650px);
     aspect-ratio: 500 / 400;
     background: url(/images/katha-light.svg) left top / contain no-repeat;
     opacity: 0.45;
     pointer-events: none;
   }
 
-  // Aapki Awaaz drawing (community with speech bubbles) bleeding off the right edge, next to the last row.
+  // Aapki Awaaz drawing (community with speech bubbles) near the last row.
   // Drawn as the section's own background; the SVG carries its own 0.45 opacity.
-  background: url(/images/aapki-awaaz.svg) right -60px bottom 4% / clamp(240px, 32vw, 520px) no-repeat;
+  background: url(/images/aapki-awaaz.svg) right -3vw bottom 4% / clamp(130px, 27vw, 520px) no-repeat;
 
   > .container { position: relative; z-index: 1; } // keeps the content above the illustrations
 
-  @media (max-width: 720px) {
-    background-size: 200px;
+  // Rows stack into one column at 820px, so the drawings get fainter behind the text.
+  @media (max-width: 820px) {
     &::before,
-    &::after { width: 200px; opacity: 0.25; }
+    &::after { opacity: 0.25; }
+  }
+  // Phones (down to 320px): smaller and extra faint so the text stays readable.
+  @media (max-width: 480px) {
+    &::before,
+    &::after { opacity: 0.18; }
   }
 }
 
