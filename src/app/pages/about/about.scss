@@ -37,49 +37,42 @@
 }
 
 // ================= Pull-quote and two-column intro =================
-// Mobile first: text on top, the four photos in a 2 x 2 grid below. 600px+: one row of four.
-// 1200px+: photos move to the sides of the text (two stacked on each side).
+// The café line drawing fills the whole section as a faint backdrop, pinned to the left.
+.intro-section {
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url(/images/side-cafe.svg) no-repeat;
+    opacity: 0.3;
+    pointer-events: none;
+    background-position: -8% 220px;
+    background-size: 35%;
+  }
+
+  // Responsive: the drawing scales with the screen and moves to the bottom-left corner.
+  @media (max-width: 1200px) {
+    &::before { background-position: left bottom; background-size: 45%; }
+  }
+  @media (max-width: 720px) {
+    &::before { background-size: 75%; opacity: 0.2; }
+  }
+  @media (max-width: 480px) {
+    &::before { background-size: 100%; opacity: 0.15; } // 320px phones: full width, extra faint
+  }
+}
+
 .intro-wrap {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(0.75rem, 2.5vw, 1.25rem);
-  align-items: center;
-
-  // Photos slide in from the sides; keep that from ever causing a sideways scrollbar.
-  overflow-x: clip;
-
-  .intro { grid-column: 1 / -1; order: -1; }
-
-  @media (min-width: 600px) {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  @media (min-width: 1200px) {
-    max-width: 1700px;
-    grid-template-columns: clamp(160px, 13vw, 260px) minmax(0, 980px) clamp(160px, 13vw, 260px);
-    justify-content: center;
-    gap: clamp(1.5rem, 3vw, 3rem);
-
-    .intro { grid-column: auto; order: 0; }
-  }
+  position: relative; // keeps the text above the backdrop
+  z-index: 1;
 }
 
 .intro {
   max-width: 980px;
-}
-
-// ---- Side photo cards ----
-// Below 1200px the wrappers disappear so the four photos sit directly in .intro-wrap's grid.
-.deco {
-  display: contents;
-
-  @media (min-width: 1200px) {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(1rem, 1.6vw, 1.75rem);
-    &.deco-left .photo:nth-child(2) { margin-left: clamp(1rem, 1.8vw, 2rem); }
-    &.deco-right .photo:nth-child(2) { margin-right: clamp(1rem, 1.8vw, 2rem); }
-  }
+  margin-inline: auto;
 }
 
 .photo {
@@ -290,6 +283,49 @@
 }
 
 // ================= Signature features: alternating spotlights =================
+// Animated "voices" illustration (mic, sound waves, Katha / Charcha / Aapki Awaaz bubbles) in the top-right corner.
+.features-section {
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 40%;
+    left: -50px;
+    width: clamp(240px, 28vw, 450px);
+    aspect-ratio: 480 / 360;
+    background: url(/images/features-voices.svg) right top / contain no-repeat;
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
+  // Katha drawing (book, lotus, flame) bleeding off the right edge, next to the Katha row.
+  &::after {
+    content: '';
+    position: absolute;
+    top: 5%;
+    right: -130px;
+    width: clamp(240px, 48vw, 650px);
+    aspect-ratio: 500 / 400;
+    background: url(/images/katha-light.svg) left top / contain no-repeat;
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
+  // Aapki Awaaz drawing (community with speech bubbles) bleeding off the right edge, next to the last row.
+  // Drawn as the section's own background; the SVG carries its own 0.45 opacity.
+  background: url(/images/aapki-awaaz.svg) right -60px bottom 4% / clamp(240px, 32vw, 520px) no-repeat;
+
+  > .container { position: relative; z-index: 1; } // keeps the content above the illustrations
+
+  @media (max-width: 720px) {
+    background-size: 200px;
+    &::before,
+    &::after { width: 200px; opacity: 0.25; }
+  }
+}
+
 .spotlights {
   display: grid;
   gap: clamp(3rem, 8vw, 6rem);

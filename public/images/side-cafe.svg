@@ -1,0 +1,202 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="164 96 688 500" role="img" aria-label="Line drawing of two young people talking at a café table with coffee, books and flowers">
+  <style>
+    .o  { fill: #FAF7F2; stroke: #1F3A5F; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .l  { fill: none; stroke: #1F3A5F; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .f  { fill: none; stroke: #1F3A5F; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .anim { transform-box: fill-box; }
+    .mForearm { transform-origin: 6% 70%; animation: gesture 8s ease-in-out infinite; }
+    .wForearm { transform-origin: 70% 92%; animation: sip 8s ease-in-out infinite; }
+    .mHead { transform-origin: 30% 95%; animation: talkHead 8s ease-in-out infinite; }
+    .wHead { transform-origin: 30% 95%; animation: talkHead 8s ease-in-out infinite; animation-delay: -4s; }
+    .breathe { transform-origin: 50% 100%; animation: breathe 4s ease-in-out infinite; }
+    .w .breathe { animation-delay: -1.7s; }
+    .steam { animation: steam 3s ease-in-out infinite; }
+    .steam2 { animation-delay: -1.5s; }
+    .flowers { transform-origin: 50% 100%; animation: sway 6s ease-in-out infinite; }
+
+    @keyframes gesture {
+      0%,48%,100% { transform: rotate(0); }
+      8% { transform: rotate(-16deg); } 16% { transform: rotate(-4deg); }
+      26% { transform: rotate(-20deg); } 38% { transform: rotate(-3deg); }
+    }
+    @keyframes sip {
+      0%,46%,100% { transform: rotate(0); }
+      56%,90% { transform: rotate(14deg); }
+    }
+    @keyframes talkHead {
+      0%,48%,100% { transform: rotate(0); }
+      10% { transform: rotate(-2deg); } 24% { transform: rotate(1.5deg); } 36% { transform: rotate(-1.5deg); }
+      58% { transform: rotate(4deg); } 64% { transform: rotate(0); }
+      78% { transform: rotate(4deg); } 84% { transform: rotate(0); }
+    }
+    @keyframes breathe { 0%,100% { transform: scaleY(1); } 50% { transform: scaleY(1.01); } }
+    @keyframes steam { 0% { opacity: 0; transform: translateY(5px); } 40% { opacity: 1; } 100% { opacity: 0; transform: translateY(-14px); } }
+    @keyframes sway { 0%,100% { transform: rotate(-1.5deg); } 50% { transform: rotate(1.5deg); } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+
+
+  <defs>
+    <!-- Makes the white areas transparent and colours the lines.
+         To change the line colour, edit flood-color below (e.g. #FFFFFF for white lines). -->
+    
+  </defs>
+  <g>
+  
+  <!-- floor hints -->
+  <path class="f" d="M150 592 H330 M420 592 H580 M670 592 H850"/>
+
+  <!-- ===== TABLE ===== -->
+  <path class="o" d="M494 334 H506 V572 H494 Z"/>
+  <path class="o" d="M468 590 Q482 578 494 572 H506 Q518 578 532 590 Q528 593 524 591 Q512 583 500 582 Q488 583 476 591 Q472 593 468 590 Z"/>
+  <path class="o" d="M372 320 H628 Q636 320 636 327 Q636 334 628 334 H372 Q364 334 364 327 Q364 320 372 320 Z"/>
+
+  <!-- notebook (under man's hand) -->
+  <path class="o" d="M446 320 Q462 312 476 316 Q490 312 506 320 Z"/>
+  <path class="f" d="M452 318 Q463 314 474 317 M478 317 Q489 314 500 318"/>
+  <!-- man's coffee cup -->
+  <path class="o" d="M508 318.5 H534 Q533 320 521 320 Q509 320 508 318.5 Z"/>
+  <path class="l" d="M529 300 q7 0 7 5.5 q0 5.5 -8 6"/>
+  <path class="o" d="M511 297 H531 L529.5 311 Q528 318.5 521 318.5 Q514 318.5 512.5 311 Z"/>
+  <path class="f steam" d="M518 290 q-3 -4 0 -8 q3 -4 0 -8"/>
+  <path class="f steam steam2" d="M524 291 q-3 -4 0 -8 q3 -4 0 -8"/>
+
+  <!-- flowers in a slim vase -->
+  <g class="anim flowers">
+    <path class="l" d="M548 262 C 547 240, 544 214, 538 190 M548 262 C 552 238, 560 220, 568 206 M548 262 C 546 246, 536 232, 526 222 M548 262 C 552 248, 556 236, 556 222"/>
+    <path class="o" d="M545 236 C 536 234, 530 226, 529 218 C 538 220, 544 226, 545 236 Z"/>
+    <path class="o" d="M551 244 C 560 242, 566 236, 568 228 C 559 230, 553 236, 551 244 Z"/>
+    <path class="f" d="M544 235 L 532 221 M552 243 L 565 231"/>
+    <!-- tulip -->
+    <path class="o" d="M531 192 C 529 180, 532 172, 538 170 C 544 172, 547 180, 545 192 C 541 196, 535 196, 531 192 Z"/>
+    <path class="f" d="M538 170 C 536 178, 536 186, 538 194 M533 176 C 536 180, 540 180, 543 176"/>
+    <!-- rose -->
+    <path class="o" d="M560 206 C 558 197, 563 191, 569 191 C 576 191, 580 198, 577 206 C 572 211, 565 211, 560 206 Z"/>
+    <path class="f" d="M564 199 C 566 195, 572 195, 573 200 C 573 204, 567 205, 566 201 M561 204 C 566 207, 572 207, 576 203"/>
+    <!-- small daisy -->
+    <circle class="o" cx="525" cy="220" r="5.5"/>
+    <circle class="f" cx="525" cy="220" r="2"/>
+    <path class="f" d="M525 212 V209 M518.5 216 L516 214.5 M531.5 216 L534 214.5 M519 225 L517 227 M531 225 L533 227"/>
+    <!-- bud -->
+    <path class="o" d="M551 222 C 550 215, 553 211, 556 210 C 559 211, 561 216, 559 222 C 557 224, 553 224, 551 222 Z"/>
+  </g>
+  <path class="o" d="M543 262 H553 C 553 270, 557 276, 558 286 C 559 300, 556 312, 556 320 H540 C 540 312, 537 300, 538 286 C 539 276, 543 270, 543 262 Z"/>
+  <path class="f" d="M541 282 C 546 284, 550 284, 555 282"/>
+
+  <!-- stack of books -->
+  <path class="o" d="M566 310 H610 Q612 310 612 312 V318 Q612 320 610 320 H566 Z"/>
+  <path class="f" d="M607 311 V319 M570 315 H602"/>
+  <path class="o" d="M570 301 H606 Q608 301 608 303 V308 Q608 310 606 310 H570 Z"/>
+  <path class="f" d="M573 302 V309 M577 305.5 H602"/>
+  <path class="o" d="M564 301 L572 292 H612 L604 301 Z"/>
+  <path class="f" d="M574 296.5 H606"/>
+
+  <!-- ================= MAN (left, facing right) ================= -->
+  <g class="m">
+    <!-- chair -->
+    <path class="o" d="M178 440 L170 590 H178 L186 440 Z"/>
+    <path class="o" d="M318 440 L330 590 H338 L326 440 Z"/>
+    <path class="o" d="M186 236 Q194 234 196 242 L192 428 H183 L180 244 Q180 237 186 236 Z"/>
+    <path class="o" d="M168 428 H336 Q342 428 342 434 Q342 440 336 440 H172 Q166 440 166 434 Q166 428 168 428 Z"/>
+    <path class="f" d="M174 520 H330"/>
+
+    <!-- far shoe -->
+    <path class="o" d="M398 568 C 396 580, 398 588, 402 590 L 460 590 C 466 590, 466 582, 460 578 C 448 572, 436 570, 424 566 Z"/>
+    <!-- near leg (chinos) -->
+    <path class="o" d="M206 428 C 260 432, 350 436, 404 436 C 416 452, 420 490, 420 526 C 420 548, 418 560, 416 570 L 440 570 C 440 540, 444 490, 446 446 C 448 420, 438 402, 418 397 C 360 391, 300 387, 250 384 C 228 384, 206 396, 204 412 Z"/>
+    <path class="f" d="M413 401 Q 428 410 436 426 M300 410 Q 350 412 404 418 M436 468 Q 436 510 431 556 M408 446 Q 414 470 418 492"/>
+    <path class="f" d="M416 560 H440"/>
+    <!-- near shoe -->
+    <path class="o" d="M414 568 C 412 580, 414 588, 418 590 L 480 590 C 486 590, 486 582, 480 578 C 468 572, 454 570, 440 565 Z"/>
+    <path class="f" d="M416 586 H484 M444 570 L449 574 M450 568 L455 572"/>
+
+    <!-- neck -->
+    <path class="o" d="M300 194 C 302 206, 300 216, 300 224 L 332 230 C 327 219, 327 206, 331 196 Z"/>
+    <!-- torso (sweater over collared shirt) -->
+    <g class="anim breathe">
+      <path class="o" d="M208 412 C 202 362, 214 292, 260 238 C 274 226, 290 220, 302 216 L 332 226 C 350 250, 354 282, 350 312 C 346 342, 334 368, 304 388 L 252 390 C 230 392, 214 404, 208 412 Z"/>
+      <path class="l" d="M303 218 C 312 236, 326 248, 342 240"/>
+      <path class="o" d="M306 216 L 320 236 L 326 222 Z"/>
+      <path class="o" d="M330 226 L 334 242 L 324 232 Z"/>
+      <path class="f" d="M214 378 C 260 384, 306 384, 330 374 M216 386 C 260 392, 296 392, 316 386"/>
+      <path class="f" d="M232 300 C 240 326, 238 350, 230 372 M336 300 C 328 318, 320 330, 316 352 M270 250 C 262 270, 258 290, 260 306"/>
+      <!-- upper arm -->
+      <path class="o" d="M278 244 C 296 232, 322 238, 334 258 L 394 302 C 402 310, 398 322, 386 324 L 360 318 C 340 306, 312 290, 292 276 C 276 266, 270 252, 278 244 Z"/>
+      <path class="f" d="M318 266 C 332 276, 348 288, 362 298 M300 252 C 312 258, 320 264, 326 270 M372 312 C 378 314, 384 314, 388 312"/>
+    </g>
+    <!-- forearm & hand (gestures while talking) -->
+    <g class="anim mForearm">
+      <path class="o" d="M380 304 L 438 296 C 446 296, 448 312, 442 314 L 384 324 C 374 322, 372 308, 380 304 Z"/>
+      <path class="f" d="M396 308 C 410 306, 420 304, 430 303"/>
+      <path class="o" d="M432 296 L 439 295 L 442 314 L 435 315 Z"/>
+      <path class="o" d="M440 297 C 452 292, 464 294, 474 300 L 486 304 C 491 306, 490 310, 485 310 L 468 312 C 458 316, 446 316, 440 313 Z"/>
+      <path class="f" d="M466 306 H486 M462 309.5 L 478 310.5 M450 296 C 456 290, 464 292, 467 297"/>
+    </g>
+    <!-- head (faceless) -->
+    <g class="anim mHead">
+      <path class="o" d="M290 150 C 290 122, 312 106, 334 110 C 352 114, 360 132, 358 150 C 358 156, 362 162, 362 166 C 362 172, 358 176, 358 180 C 358 190, 352 198, 342 200 C 332 202, 322 198, 314 190 C 304 186, 296 182, 294 176 C 290 168, 290 158, 290 150 Z"/>
+      <path class="o" d="M292 160 C 284 126, 306 100, 336 104 C 352 106, 362 118, 362 132 C 352 124, 340 126, 330 132 C 322 136, 316 136, 310 134 C 304 146, 302 158, 304 170 C 298 170, 294 166, 292 160 Z"/>
+      <path class="f" d="M300 132 C 308 116, 326 110, 344 112 M306 140 C 314 126, 330 120, 352 122 M298 148 C 300 136, 306 128, 316 122"/>
+      <path class="l" d="M316 150 C 308 148, 306 158, 309 166 C 311 171, 315 171, 317 169"/>
+    </g>
+  </g>
+
+  <!-- ================= WOMAN (right, mirrored to face left) ================= -->
+  <g class="w" transform="translate(1000 0) scale(-1 1)">
+    <!-- chair -->
+    <path class="o" d="M178 440 L170 590 H178 L186 440 Z"/>
+    <path class="o" d="M318 440 L330 590 H338 L326 440 Z"/>
+    <path class="o" d="M186 236 Q194 234 196 242 L192 428 H183 L180 244 Q180 237 186 236 Z"/>
+    <path class="o" d="M168 428 H336 Q342 428 342 434 Q342 440 336 440 H172 Q166 440 166 434 Q166 428 168 428 Z"/>
+    <path class="f" d="M174 520 H330"/>
+
+    <!-- far shin & shoe -->
+    <path class="o" d="M392 470 C 394 500, 398 540, 402 570 L 420 570 C 422 540, 424 500, 426 470 Z"/>
+    <path class="o" d="M400 568 C 398 580, 400 588, 404 590 L 446 590 C 450 590, 450 584, 446 582 C 438 578, 430 574, 422 568 Z"/>
+    <!-- near shin (under skirt) -->
+    <path class="o" d="M406 470 C 408 500, 412 540, 416 570 L 436 570 C 438 540, 440 500, 442 470 Z"/>
+    <path class="f" d="M434 500 C 436 520, 436 540, 434 556"/>
+    <!-- near shoe -->
+    <path class="o" d="M414 568 C 412 580, 414 588, 418 590 L 464 590 C 468 590, 468 584, 464 582 C 454 578, 446 574, 438 568 Z"/>
+    <path class="f" d="M418 590 V 584 M426 572 C 432 576, 440 578, 448 580"/>
+    <!-- midi skirt over thighs -->
+    <path class="o" d="M206 414 C 250 392, 350 390, 410 396 C 432 402, 442 420, 446 440 C 450 456, 454 470, 458 484 C 440 490, 418 490, 398 486 C 398 470, 396 454, 392 442 C 340 440, 262 438, 206 432 Z"/>
+    <path class="f" d="M430 420 C 438 440, 442 462, 444 482 M412 444 C 416 460, 416 474, 414 486 M300 400 C 340 404, 380 404, 414 404"/>
+
+    <!-- ponytail (behind) -->
+    <path class="o" d="M262 160 C 246 176, 238 206, 242 240 C 244 254, 250 264, 256 270 C 252 250, 254 226, 262 206 C 266 190, 268 178, 270 170 Z"/>
+    <path class="f" d="M256 182 C 248 202, 246 226, 250 250 M262 186 C 256 206, 254 226, 256 246"/>
+    <!-- neck -->
+    <path class="o" d="M270 192 C 272 204, 272 214, 270 220 L 298 224 C 294 214, 294 202, 298 194 Z"/>
+    <!-- torso (soft blouse) -->
+    <g class="anim breathe">
+      <path class="o" d="M210 414 C 204 360, 210 292, 234 248 C 244 234, 258 224, 272 216 L 298 222 C 316 242, 320 270, 312 292 C 306 314, 302 336, 300 356 C 298 372, 296 386, 290 394 L 250 394 C 230 396, 214 404, 210 414 Z"/>
+      <path class="l" d="M272 217 C 278 230, 290 234, 298 223"/>
+      <path class="f" d="M226 300 C 232 324, 232 350, 226 380 M298 304 C 292 320, 290 336, 291 352 M246 252 C 240 272, 238 292, 240 310 M214 392 C 240 386, 270 386, 296 390"/>
+      <!-- upper arm (sleeve) -->
+      <path class="o" d="M246 240 C 262 230, 284 236, 296 254 L 372 300 C 382 308, 380 322, 368 324 L 340 316 C 318 304, 290 290, 266 274 C 248 264, 240 250, 246 240 Z"/>
+      <path class="f" d="M280 262 C 300 274, 324 288, 344 298 M266 250 C 276 256, 286 262, 292 268"/>
+    </g>
+    <!-- forearm, cup & hands (lowers cup when she starts talking) -->
+    <g class="anim wForearm">
+      <path class="o" d="M364 322 C 360 300, 354 276, 346 254 L 364 246 C 372 268, 380 294, 384 316 C 384 326, 368 330, 364 322 Z"/>
+      <path class="f" d="M356 268 C 362 284, 366 298, 370 312"/>
+      <path class="l" d="M332 218 q-8 0 -8 6 q0 6 9 6.5"/>
+      <path class="o" d="M334 212 H360 L358 232 Q356 240 347 240 Q338 240 336 232 Z"/>
+      <path class="f" d="M341 206 q-3 -4 0 -8 q3 -4 0 -8 M350 207 q-3 -4 0 -8 q3 -4 0 -8"/>
+      <path class="o" d="M332 230 C 332 222, 342 220, 350 224 C 358 220, 368 222, 368 230 C 368 242, 360 250, 350 250 C 340 250, 332 242, 332 230 Z"/>
+      <path class="f" d="M338 232 C 344 230, 352 230, 360 233 M340 238 C 346 236, 352 236, 358 239 M362 226 C 366 222, 368 218, 366 214"/>
+    </g>
+    <!-- head (faceless) with soft fringe -->
+    <g class="anim wHead">
+      <path class="o" d="M256 150 C 256 124, 276 108, 296 111 C 313 114, 321 130, 319 148 C 319 154, 323 160, 323 164 C 323 170, 319 174, 319 178 C 319 188, 313 195, 304 197 C 295 199, 286 195, 279 188 C 270 184, 262 180, 260 174 C 256 166, 256 158, 256 150 Z"/>
+      <path class="o" d="M258 168 C 248 126, 272 98, 302 104 C 320 108, 328 124, 324 144 C 316 134, 308 128, 300 128 C 296 136, 288 140, 280 140 C 276 152, 274 164, 276 176 C 266 178, 260 174, 258 168 Z"/>
+      <path class="f" d="M264 136 C 272 118, 290 110, 308 114 M270 148 C 276 132, 288 124, 302 122 M300 128 C 310 130, 318 136, 322 144 M262 160 C 262 146, 268 134, 278 126"/>
+      <ellipse class="o" cx="264" cy="168" rx="4" ry="5.5" transform="rotate(-30 264 168)"/>
+      <path class="l" d="M284 152 C 277 150, 275 159, 278 166 C 280 171, 284 171, 286 169"/>
+      <circle class="f" cx="283" cy="174" r="1.6"/>
+    </g>
+  </g>
+  </g>
+</svg>

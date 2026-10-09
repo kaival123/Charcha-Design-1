@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400" style="opacity:.45" role="img" aria-label="Animated line drawing of three people from a community sharing their thoughts, with speech bubbles popping up above them">
+  <style>
+    .ln { fill: none; stroke: #1F3A5F; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+    .th { fill: none; stroke: #1F3A5F; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+    .pg { fill: #FAF7F2; stroke: #1F3A5F; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+    .red { fill: #C0392B; }
+    .redl { fill: none; stroke: #C0392B; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+    .gold { fill: #F3D94A; }
+
+    .bub { transform-box: fill-box; transform-origin: 50% 100%; opacity: 0; animation: pop 7.5s ease-out infinite; }
+    .b2 { animation-delay: 2.5s; }
+    .b3 { animation-delay: 5s; }
+    .heart { transform-box: fill-box; transform-origin: center; animation: beat 1.2s ease-in-out infinite; }
+    .dot { animation: dot 1.4s ease-in-out infinite; }
+    .d2 { animation-delay: .2s; }
+    .d3 { animation-delay: .4s; }
+    .star { transform-box: fill-box; transform-origin: center; animation: twirl 3s ease-in-out infinite; }
+    .wave { transform-box: fill-box; transform-origin: 100% 100%; animation: wave 2.4s ease-in-out infinite; }
+    .nod { transform-box: fill-box; transform-origin: 50% 100%; animation: nod 5s ease-in-out infinite; }
+    .n2 { animation-delay: -1.7s; }
+    .n3 { animation-delay: -3.4s; }
+    .rise { animation: rise 5s ease-in infinite; opacity: 0; }
+    .r2 { animation-delay: 1.6s; }
+    .r3 { animation-delay: 3.2s; }
+
+    @keyframes pop { 0% { opacity: 0; transform: scale(.3); } 8%, 30% { opacity: 1; transform: scale(1); } 36% { opacity: 1; transform: scale(1.04); } 44%, 100% { opacity: 0; transform: scale(.9); } }
+    @keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.22); } }
+    @keyframes dot { 0%, 100% { opacity: .25; } 50% { opacity: 1; } }
+    @keyframes twirl { 0%, 100% { transform: rotate(0) scale(1); } 50% { transform: rotate(25deg) scale(1.15); } }
+    @keyframes wave { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-14deg); } }
+    @keyframes nod { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(3deg); } }
+    @keyframes rise { 0% { opacity: 0; transform: translateY(0); } 20% { opacity: 1; } 100% { opacity: 0; transform: translateY(-70px); } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } .bub { opacity: 1; } }
+  </style>
+
+  <!-- ground -->
+  <path class="th" d="M50 340 H450"/>
+
+  <!-- left person (waving) -->
+  <g>
+    <path class="pg" d="M108 340 Q108 302 140 298 Q172 302 172 340 Z"/>
+    <g class="wave">
+      <path class="ln" d="M120 312 Q96 300 96 268"/>
+      <circle class="pg" cx="96" cy="262" r="7"/>
+    </g>
+    <g class="nod n2">
+      <circle class="pg" cx="140" cy="272" r="20"/>
+      <path class="th" d="M130 270 q3 -3 6 0 M146 270 q3 -3 6 0 M134 280 Q141 286 148 280"/>
+    </g>
+  </g>
+
+  <!-- centre person -->
+  <g>
+    <path class="pg" d="M204 340 Q204 290 250 286 Q296 290 296 340 Z"/>
+    <path class="th" d="M250 286 V340"/>
+    <g class="nod">
+      <circle class="pg" cx="250" cy="256" r="24"/>
+      <path class="th" d="M240 254 q3 -3 6 0 M256 254 q3 -3 6 0 M243 266 Q251 273 259 266"/>
+    </g>
+  </g>
+
+  <!-- right person -->
+  <g>
+    <path class="pg" d="M328 340 Q328 302 360 298 Q392 302 392 340 Z"/>
+    <g class="nod n3">
+      <circle class="pg" cx="360" cy="272" r="20"/>
+      <path class="th" d="M350 270 q3 -3 6 0 M366 270 q3 -3 6 0 M354 280 Q361 286 368 280"/>
+    </g>
+  </g>
+
+  <!-- bubble over the left person: heart -->
+  <g class="bub">
+    <path class="pg" d="M50 150 H140 Q154 150 154 164 V196 Q154 210 140 210 H112 L98 228 L100 210 H64 Q50 210 50 196 V164 Q50 150 64 150 Z"/>
+    <path class="red heart" d="M102 196 C88 186 86 172 96 170 C100 169 102 172 102 174 C102 172 104 169 108 170 C118 172 116 186 102 196 Z"/>
+  </g>
+
+  <!-- bubble over the centre person: typing dots -->
+  <g class="bub b2">
+    <path class="pg" d="M198 70 H302 Q318 70 318 86 V120 Q318 136 302 136 H262 L248 156 L246 136 H214 Q198 136 198 120 V86 Q198 70 214 70 Z"/>
+    <circle class="gold dot" cx="232" cy="103" r="6"/>
+    <circle class="gold dot d2" cx="258" cy="103" r="6"/>
+    <circle class="gold dot d3" cx="284" cy="103" r="6"/>
+  </g>
+
+  <!-- bubble over the right person: star -->
+  <g class="bub b3">
+    <path class="pg" d="M346 150 H436 Q450 150 450 164 V196 Q450 210 436 210 H408 L394 228 L396 210 H360 Q346 210 346 196 V164 Q346 150 360 150 Z"/>
+    <path class="gold star" d="M398 164 l5 11 12 2 -9 8 3 12 -11 -6 -11 6 3 -12 -9 -8 12 -2 z" stroke="#C0392B" stroke-width="1.6" stroke-linejoin="round"/>
+  </g>
+
+  <!-- small hearts rising -->
+  <path class="rise red" d="M176 250 c-5 -4 -5 -9 -1.5 -9 c1.5 0 1.5 1.5 1.5 1.5 c0 0 0 -1.5 1.5 -1.5 c3.5 0 3.5 5 -1.5 9 z"/>
+  <path class="rise r2 red" d="M326 244 c-5 -4 -5 -9 -1.5 -9 c1.5 0 1.5 1.5 1.5 1.5 c0 0 0 -1.5 1.5 -1.5 c3.5 0 3.5 5 -1.5 9 z"/>
+  <path class="rise r3 red" d="M296 226 c-5 -4 -5 -9 -1.5 -9 c1.5 0 1.5 1.5 1.5 1.5 c0 0 0 -1.5 1.5 -1.5 c3.5 0 3.5 5 -1.5 9 z"/>
+</svg>

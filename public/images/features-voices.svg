@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" role="img" aria-label="Animated line drawing of a microphone with sound waves and three floating speech bubbles: a book, a chat and a megaphone">
+  <style>
+    .ln { fill: none; stroke: #1F3A5F; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+    .th { fill: none; stroke: #1F3A5F; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+    .bg { fill: #FAF7F2; stroke: #1F3A5F; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+    .red { fill: none; stroke: #C0392B; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+    .gold { fill: #F3D94A; stroke: none; }
+
+    .wave { transform-box: fill-box; transform-origin: center; animation: wave 2.8s ease-out infinite; opacity: 0; }
+    .w2 { animation-delay: .9s; }
+    .w3 { animation-delay: 1.8s; }
+    .float { animation: float 5s ease-in-out infinite; }
+    .f2 { animation-delay: -1.7s; animation-duration: 6s; }
+    .f3 { animation-delay: -3.2s; animation-duration: 5.5s; }
+    .dot { animation: dot 1.4s ease-in-out infinite; }
+    .d2 { animation-delay: .2s; }
+    .d3 { animation-delay: .4s; }
+    .spark { transform-box: fill-box; transform-origin: center; animation: spark 3s ease-in-out infinite; }
+    .s2 { animation-delay: 1s; }
+    .s3 { animation-delay: 2s; }
+    .mic { transform-box: fill-box; transform-origin: 50% 100%; animation: mic 2.8s ease-in-out infinite; }
+    .page { transform-box: fill-box; transform-origin: 0 50%; animation: page 4s ease-in-out infinite; }
+    .cone { transform-box: fill-box; transform-origin: 0 50%; animation: cone 2.2s ease-in-out infinite; }
+
+    @keyframes wave { 0% { opacity: .9; transform: scale(.55); } 100% { opacity: 0; transform: scale(1.25); } }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+    @keyframes dot { 0%, 100% { opacity: .25; } 50% { opacity: 1; } }
+    @keyframes spark { 0%, 100% { opacity: 0; transform: scale(.4); } 50% { opacity: 1; transform: scale(1); } }
+    @keyframes mic { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+    @keyframes page { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(.78); } }
+    @keyframes cone { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } .wave { opacity: .35; } }
+  </style>
+
+  <!-- ground line -->
+  <path class="th" d="M70 322 H410"/>
+
+  <!-- sound waves (left & right of the mic) -->
+  <g>
+    <path class="red wave" d="M196 150 Q176 180 196 210"/>
+    <path class="red wave w2" d="M196 150 Q176 180 196 210"/>
+    <path class="red wave w3" d="M196 150 Q176 180 196 210"/>
+    <path class="red wave" d="M284 150 Q304 180 284 210"/>
+    <path class="red wave w2" d="M284 150 Q304 180 284 210"/>
+    <path class="red wave w3" d="M284 150 Q304 180 284 210"/>
+  </g>
+
+  <!-- microphone (Charcha) -->
+  <g class="mic">
+    <rect class="bg" x="218" y="118" width="44" height="86" rx="22"/>
+    <path class="th" d="M226 140 H254 M226 152 H254 M226 164 H254 M226 176 H254"/>
+    <path class="ln" d="M206 176 Q206 226 240 226 Q274 226 274 176"/>
+    <path class="ln" d="M240 226 V300"/>
+    <path class="bg" d="M210 322 Q214 300 240 300 Q266 300 270 322 Z"/>
+  </g>
+
+  <!-- bubble 1: Katha (open book) -->
+  <g class="float">
+    <path class="bg" d="M70 40 H160 Q176 40 176 56 V102 Q176 118 160 118 H122 L104 138 L106 118 H86 Q70 118 70 102 V56 Q70 40 86 40 Z"/>
+    <path class="ln" d="M123 66 Q108 60 94 64 V98 Q108 94 123 100 Q138 94 152 98 V64 Q138 60 123 66 Z"/>
+    <path class="page th" d="M123 66 V100"/>
+    <path class="th" d="M100 74 Q110 72 118 74 M100 82 Q110 80 118 82 M129 74 Q137 72 146 74"/>
+  </g>
+
+  <!-- bubble 2: Charcha (conversation / typing dots) -->
+  <g class="float f2">
+    <path class="bg" d="M300 24 H392 Q408 24 408 40 V76 Q408 92 392 92 H372 L384 112 L352 92 H316 Q300 92 300 76 V40 Q300 24 316 24 Z"/>
+    <circle class="dot gold" cx="334" cy="58" r="6"/>
+    <circle class="dot d2 gold" cx="354" cy="58" r="6"/>
+    <circle class="dot d3 gold" cx="374" cy="58" r="6"/>
+  </g>
+
+  <!-- bubble 3: Aapki Awaaz (megaphone) -->
+  <g class="float f3">
+    <path class="bg" d="M312 196 H408 Q424 196 424 212 V258 Q424 274 408 274 H396 L406 294 L378 274 H328 Q312 274 312 258 V212 Q312 196 328 196 Z"/>
+    <path class="ln" d="M334 240 V226 L352 224 L378 212 V254 L352 242 L334 240 Z"/>
+    <path class="th" d="M340 242 L344 256"/>
+    <g class="cone">
+      <path class="red" d="M388 224 Q396 233 388 242"/>
+      <path class="red" d="M396 218 Q409 233 396 248"/>
+    </g>
+  </g>
+
+  <!-- sparkles -->
+  <path class="gold spark" d="M60 190 l4 10 10 4 -10 4 -4 10 -4 -10 -10 -4 10 -4 z"/>
+  <path class="gold spark s2" d="M444 150 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 z"/>
+  <path class="gold spark s3" d="M150 270 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 z"/>
+</svg>
